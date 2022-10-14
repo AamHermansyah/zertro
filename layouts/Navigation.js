@@ -2,26 +2,40 @@ import Link from "next/link";
 import { useState } from "react";
 import Footer from "../components/Footer";
 import { navbar } from "../constants";
+import useWindowDimensions from "../hooks/useWindowDimensions";
 
 export default function Navigation({children}){
     const [navlinkId, setNavlinkId] = useState('navbar-1');
+    const [navigationDisplay, setNavigationDisplay] = useState(true);
+
+    const {width} = useWindowDimensions();
+    const style = {
+        navigation: {
+            display: width < 1060 ? 'hidden' : 'flex',
+            shadow: width < 1060 ? 'shadow-2xl' : ''
+        }
+    }
 
     const handleNavLink = event => {
-        event.preventDefault();
         setNavlinkId(event.target.id)
+    }
+
+    const handleNavbar = () => {
+        setNavigationDisplay(prev => !prev);
     }
 
     return (
         <>
-            <div className="pt-6 md:pl-[250px] mt-16 md:mt-0">
+            <div className="md:pl-[250px] mt-16 md:mt-0">
                 <div className="md:hidden fixed top-0 left-0 bg-white w-full h-16 flex justify-between px-4 z-[999]">
                     <div className="p-4 text-center">
                         <Link href="/">
                             <a className="flex-shrink-0 text-2xl text-primary font-semibold">Zetro</a>
                         </Link>
                     </div>
-                    <div className="-mr-2 flex md:hidden">
-                        <button className="text-gray-800 dark:text-white inline-flex items-center justify-center p-2 rounded-md focus:outline-none">
+                    <div className={`-mr-2 flex md:hidden`}>
+                        <button onClick={handleNavbar}
+                        className="text-gray-800 dark:text-white inline-flex items-center justify-center p-2 rounded-md focus:outline-none">
                             <svg width={20} height={20} fill="currentColor" className="h-8 w-8" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M1664 1344v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45zm0-512v128q0 26-19 45t-45 19h-1408q-26 0-45-19t-19-45v-128q0-26 19-45t45-19h1408q26 0 45 19t19 45z">
                                 </path>
@@ -29,7 +43,7 @@ export default function Navigation({children}){
                         </button>
                     </div>
                 </div>
-                <nav className="hidden md:flex flex-col bg-white fixed w-[250px] h-screen top-0 left-0 z-[999] dark:bg-gray-800 ">
+                <nav className={`${navigationDisplay ? style.navigation.display : 'flex'} ${style.navigation.shadow} flex-col bg-white fixed w-[250px] h-screen top-0 left-0 z-[999] dark:bg-gray-800 duration-200 transition-all`}>
                     <div className="p-4 text-center">
                         <Link href="/">
                             <a className="flex-shrink-0 text-2xl text-primary font-semibold">Zetro</a>

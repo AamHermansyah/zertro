@@ -3,7 +3,7 @@ import heroBg from '../public/hero.jpg';
 
 export default function Hero(){
     return (
-        <section id="hero">
+        <section id="home" className="pt-6">
             <div className="bg-gradient-to-tr from-yellow-500 to-pink-500 rounded-3xl dark:bg-gray-800 relative">
                 <div className="absolute inset-0 z-[1] opacity-20">
                     <Image src={heroBg} alt="Hero background" objectFit="cover" layout="fill" />

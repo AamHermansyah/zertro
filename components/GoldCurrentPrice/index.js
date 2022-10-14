@@ -49,7 +49,7 @@ export default function GoldCurrentPrice(){
 
     
     return (
-        <section id="gold_price_current" className="mt-8 shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-800">
+        <section id="harga-emas" className="mt-8 shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-800">
           <div className="px-6 sm:w-[300px]">
             <h4 className="mb-4 font-semibold text-xl">Harga emas saat ini</h4>
             {loading ? 

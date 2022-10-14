@@ -4,7 +4,8 @@ import useWindowDimensions from '../../hooks/useWindowDimensions';
 import gold_price_monthly_json from './json/gold_price_monthly.json';
 import gold_price_annual_json from './json/gold_price_annual.json';
 import { getPriceHistoryPromise } from './promises/goldPriceHistoryPromise';
-import TablePercentagePerYears from './TablePercentagePerYears';
+import TablePercentagePerYears from '../TablePercentagePerYears';
+import ChartSkeleton from '../../layouts/ChartSKeleton';
 
 export default  function GoldPriceHistory(){
     const [dataMonthlyLabels, setDataMonthlyLabels] = useState(null);
@@ -34,8 +35,8 @@ export default  function GoldPriceHistory(){
     }, []);
 
     return (
-        <section className="mt-12 bg-white p-4 pb-12 rounded-md" id="gold_price_history">
-            {!isLoading &&
+        <section className="mt-12 bg-white sm:p-4 pb-12 rounded-md" id="gold_price_history">
+            {!isLoading ?
                 <div className="flex flex-col gap-12 items-center">
                     <Chart
                     type='line' 
@@ -108,10 +109,15 @@ export default  function GoldPriceHistory(){
                         }
                     }}
                     />
-
-                    <TablePercentagePerYears data={dataTable} />
-                </div>
+                </div> :
+                <ChartSkeleton />
             }
+            <div className="flex mt-12 justify-center">
+                {!isLoading ?
+                    <TablePercentagePerYears data={dataTable} /> :
+                    <ChartSkeleton />    
+                }
+            </div>
         </section>
     )
 }

@@ -21,12 +21,16 @@ export default function TablePercentagePerYears(props){
     }
 
     useEffect(() => {
-        console.log(isSortTypeInc)
-        setData(isSortTypeInc ? props.data : props.data.reverse());
+        setData(props.data);
+    }, []);
+
+    useEffect(() => {
+        setData(props.data.reverse());
+        setLimitPagination(LIMIT_PAGINATION);
     }, [isSortTypeInc]);
 
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center" id="tabel-laba">
             <h2 className="text-2xl font-semibold">Tabel laba (1950 - 2017)</h2>
             <div className="mt-6 self-end">
                 <button onClick={() => setIsSortTypeInc(prev => !prev)}
@@ -66,14 +70,14 @@ export default function TablePercentagePerYears(props){
                 {limitPagination > LIMIT_PAGINATION &&
                     <button onClick={() => handlePagination({type: "previous"})}
                     type="button" 
-                    className="w-max mt-6 mx-auto py-2 px-4 mr-4 bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg">
+                    className="w-max mt-6 mx-auto py-2 px-4 mr-4 bg-red-600 hover:bg-red-700 focus:ring-red-500 focus:ring-offset-red-200 text-white transition ease-in duration-200 text-center text-base shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-sm">
                         mundur
                     </button>
                 }
                 {limitPagination < props.data.length && 
                     <button onClick={handlePagination}
                     type="button" 
-                    className="w-max mt-6 mx-auto py-2 px-6  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg">
+                    className="w-max mt-6 mx-auto py-2 px-6  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-sm">
                         muat
                     </button>
                 }
