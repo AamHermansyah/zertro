@@ -43,7 +43,7 @@ export default function Navigation({children}){
                         </button>
                     </div>
                 </div>
-                <nav className={`${navigationDisplay ? style.navigation.display : 'flex'} ${style.navigation.shadow} flex-col bg-white fixed w-[250px] h-screen top-0 left-0 z-[999] dark:bg-gray-800 duration-200 transition-all`}>
+                <nav className={`${navigationDisplay ? 'flex' : style.navigation.display} ${style.navigation.shadow} flex-col bg-white fixed w-[250px] h-screen top-0 left-0 z-[999] dark:bg-gray-800 duration-200 transition-all`}>
                     <div className="p-4 text-center">
                         <Link href="/">
                             <a className="flex-shrink-0 text-2xl text-primary font-semibold">Zetro</a>

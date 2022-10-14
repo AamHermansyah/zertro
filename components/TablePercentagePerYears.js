@@ -24,17 +24,17 @@ export default function TablePercentagePerYears(props){
         setData(props.data);
     }, []);
 
-    useEffect(() => {
-        setData(props.data.reverse());
-        setLimitPagination(LIMIT_PAGINATION);
-    }, [isSortTypeInc]);
+    const handleSortButton = () => {
+        setIsSortTypeInc(prev => !prev);
+        setData([...props.data].reverse());
+    }
 
     return (
         <div className="flex flex-col items-center" id="tabel-laba">
             <h2 className="text-2xl font-semibold">Tabel laba (1950 - 2017)</h2>
             <div className="mt-6 self-end">
-                <button onClick={() => setIsSortTypeInc(prev => !prev)}
-                className="ml-4 underline text-indigo-600">Terbaru</button>
+                <button onClick={handleSortButton}
+                className="ml-4 bg-primary px-2 py-1 text-white text-sm font-thin">sort {isSortTypeInc ? '(naik)' : '(turun)'}</button>
             </div>
             <table className="table sm:w-[620px] shadow rounded-lg">
                 <thead>
