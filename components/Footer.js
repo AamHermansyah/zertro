@@ -3,7 +3,7 @@ import { footer } from "../constants";
 
 export default function Footer(){
     return (
-        <footer className="bg-white dark:bg-gray-800 w-full pt-8 pb-4">
+        <footer className="bg-white dark:bg-gray-800 w-full pt-6 pb-4 mt-10">
             <h2 className="text-center text-xl font-semibold">Navigasi</h2>
             <div className="max-w-screen-xl mx-auto px-4">
                 <ul className="max-w-screen-md mx-auto text-lg font-light flex flex-wrap justify-center gap-x-8">

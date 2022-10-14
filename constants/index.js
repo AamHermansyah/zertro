@@ -49,3 +49,36 @@ export const footer = {
         ]
     }
 }
+
+export const navbar = [
+    {
+        id: 'navbar-1',
+        title: 'Home',
+        href: '#home',
+    },
+    {
+        id: 'navbar-2',
+        title: 'Harga emas',
+        href: '#harga-emas',
+    },
+    {
+        id: 'navbar-3',
+        title: 'Tabel laba',
+        href: '#tabel-laba',
+    },
+    {
+        id: 'navbar-4',
+        title: 'Prediksi',
+        href: '#prediksi',
+    },
+    {
+        id: 'navbar-5',
+        title: 'Donasi',
+        href: '#donasi',
+    },
+    {
+        id: 'navbar-6',
+        title: 'Contact',
+        href: '#contact',
+    },
+]

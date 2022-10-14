@@ -1,15 +1,3 @@
-import {
-    Chart as ChartJS,
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-    LineController
-  } from 'chart.js';
-
 import { useEffect, useState } from 'react';
 import { Chart } from 'react-chartjs-2';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
@@ -17,17 +5,6 @@ import gold_price_monthly_json from './json/gold_price_monthly.json';
 import gold_price_annual_json from './json/gold_price_annual.json';
 import { getPriceHistoryPromise } from './promises/goldPriceHistoryPromise';
 import TablePercentagePerYears from './TablePercentagePerYears';
-
-  ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend,
-    LineController
-  )
 
 export default  function GoldPriceHistory(){
     const [dataMonthlyLabels, setDataMonthlyLabels] = useState(null);
@@ -57,7 +34,7 @@ export default  function GoldPriceHistory(){
     }, []);
 
     return (
-        <section className="mt-12" id="gold_price_history">
+        <section className="mt-12 bg-white p-4 pb-12 rounded-md" id="gold_price_history">
             {!isLoading &&
                 <div className="flex flex-col gap-12 items-center">
                     <Chart

@@ -5,6 +5,7 @@ const LIMIT_PAGINATION = 5;
 export default function TablePercentagePerYears(props){
     const [data, setData] = useState([]);
     const [limitPagination, setLimitPagination] = useState(LIMIT_PAGINATION);
+    const [isSortTypeInc, setIsSortTypeInc] = useState(true);
 
     const handlePagination = (action) => {
         if(action?.type === "previous") {
@@ -19,26 +20,19 @@ export default function TablePercentagePerYears(props){
         })
     }
 
-    // mengatasi filter
-    const handleFilter = () => {
-        setData(prev => prev.reverse());
-        console.log('ok')
-    }
-
     useEffect(() => {
-        setData(props.data);
-    }, [limitPagination]);
+        console.log(isSortTypeInc)
+        setData(isSortTypeInc ? props.data : props.data.reverse());
+    }, [isSortTypeInc]);
 
     return (
         <div className="flex flex-col items-center">
             <h2 className="text-2xl font-semibold">Tabel laba (1950 - 2017)</h2>
             <div className="mt-6 self-end">
-                <button onClick={handleFilter}
-                className="underline text-red-600">Terlama</button>
-                <button onClick={handleFilter}
+                <button onClick={() => setIsSortTypeInc(prev => !prev)}
                 className="ml-4 underline text-indigo-600">Terbaru</button>
             </div>
-            <table className="table sm:w-[620px] bg-white shadow rounded-lg">
+            <table className="table sm:w-[620px] shadow rounded-lg">
                 <thead>
                     <tr className="font-semibold">
                         <th className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap text-gray-900">Tahun</th>
@@ -51,7 +45,7 @@ export default function TablePercentagePerYears(props){
                     {data && data
                     .filter((res, index) => index < limitPagination)
                     .map((res, index) => (
-                        <tr className="text-gray-700" key={index}>
+                        <tr className="text-gray-700 odd:bg-gray-200" key={index}>
                             <td className="border-b-2 p-4 dark:border-dark-5">{res.year}</td>
                             <td className="border-b-2 p-4 dark:border-dark-5">
                                 <div className={`${+res.percentage >= 0 ? "text-green-500" : "text-red-600"} flex justify-center items-center gap-x-`}>

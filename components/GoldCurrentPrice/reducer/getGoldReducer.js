@@ -7,7 +7,7 @@ export const GET_GOLD_ACTION_TYPE = {
 }
 
 export const INITIAL_STATE = {
-    loading: false,
+    loading: true,
     data: [],
     error: false
 }
