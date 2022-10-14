@@ -6,7 +6,8 @@ import {
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    LineController
   } from 'chart.js';
 
 import { useEffect, useState } from 'react';
@@ -24,7 +25,8 @@ import TablePercentagePerYears from './TablePercentagePerYears';
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    LineController
   )
 
 export default  function GoldPriceHistory(){
