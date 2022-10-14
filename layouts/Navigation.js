@@ -1,11 +1,10 @@
 import Link from "next/link";
 import { useState } from "react";
-import Footer from "../components/Footer";
 import { navbar } from "../constants";
 import useWindowDimensions from "../hooks/useWindowDimensions";
 
-export default function Navigation({children}){
-    const [navlinkId, setNavlinkId] = useState('navbar-1');
+export default function Navigation({children, active}){
+    const [navlinkId, setNavlinkId] = useState(active || 'navbar-1');
     const [navigationDisplay, setNavigationDisplay] = useState(true);
 
     const {width} = useWindowDimensions();
@@ -16,7 +15,10 @@ export default function Navigation({children}){
         }
     }
 
-    const handleNavLink = event => {
+    const handleNavLink = href => event => {
+        event.preventDefault();
+        const element = document.querySelector(href);
+        element.scrollIntoView({ behavior: 'smooth' });
         setNavlinkId(event.target.id)
     }
 
@@ -55,7 +57,7 @@ export default function Navigation({children}){
                             {navbar.map(list => (
                                 <Link href={list.href} key={list.id}>
                                     <a id={list.id}
-                                    onClick={handleNavLink}
+                                    onClick={handleNavLink(list.href)}
                                     className={`${list.id === navlinkId ? 'bg-primary text-white pl-10' : 'text-gray-800'} block px-6 py-3 mb-2 text-base font-medium duration-200 rounded-l-full`}>
                                         {list.title}
                                     </a>
@@ -67,7 +69,6 @@ export default function Navigation({children}){
                 <div className="px-4 w-full">
                     {children}
                 </div>
-                <Footer />
             </div>
         </>
     )
