@@ -1,6 +1,4 @@
-import Github from "../public/icons/Github";
-import Instagram from "../public/icons/Instagram";
-import Whatsapp from "../public/icons/Whatsapp";
+import { Github, Whatsapp, Instagram, aam, delvan, yuldan } from '../public';
 
 export const footer = {
     navigation: {
@@ -80,5 +78,75 @@ export const navbar = [
         id: 'navbar-6',
         title: 'Contact',
         href: '#contact',
+    },
+]
+
+export const teams = [
+    {
+        name: 'Aam Hermansyah',
+        photo: aam,
+        born: '03 Maret, 2003 di Garut, Jawa Barat, Indonesia.',
+        job: 'Mahasiswa',
+        socialMedia: [
+            { 
+                link: 'instagram.com/aamhrmnsyah',
+                icon: <Instagram /> 
+            },
+            {
+                link: 'wa.me/6282316126449?text=Hii...',
+                icon: <Whatsapp />
+            },
+            {
+                link: 'github.com/AamHermansyah',
+                icon: <Github />
+            }
+        ]
+    },
+    {
+        name: 'Delvan Ramadhan',
+        photo: delvan,
+        born: '05 November, 2003 di Tasikmalaya, Jawa Barat, Indonesia.',
+        job: 'Mahasiswa',
+        socialMedia: [
+            { 
+                link: 'instagram.com/_dererere',
+                icon: <Instagram /> 
+            },
+            {
+                link: 'wa.me/62895385178849?text=Hii...',
+                icon: <Whatsapp />
+            }
+        ]
+    },
+    {
+        name: 'Yuldan Nur Addinsyah',
+        photo: yuldan,
+        born: '14 Juli, 2004 di Cilacap, Jawa Tengah, Indonesia.',
+        job: 'Mahasiswa',
+        socialMedia: [
+            { 
+                link: 'instagram.com/yuldan_png',
+                icon: <Instagram /> 
+            },
+            {
+                link: 'wa.me/6285701796316?text=Hii...',
+                icon: <Whatsapp />
+            }
+        ]
+    },
+]
+
+export const features = [
+    {
+        title: "Diagram Harga Emas",
+        description: "Menampilkan data diagram harga emas bahkan dari tahun 1950."
+    },
+    {
+        title: "Prediksi Harga Emas",
+        description: "Menyajikan beberapa informasi mengenai prediksi harga emas dimasa yang akan datang dengan beberapa algoritma prediksi."
+    },
+    {
+        title: "Tabel Laba Pertahun",
+        description: "Menampilkan informasi mengenai laba persentase harga emas pertahun."
     },
 ]

@@ -1,13 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import heroBg from '../public/hero.jpg';
+import { hero } from '../public'
 
 export default function Hero(){
     return (
         <section id="home">
             <div className="mt-6 md:mt-0 h-[500px] bg-gradient-to-tr from-primary to-pink-500 rounded-3xl dark:bg-gray-800 relative">
                 <div className="absolute inset-0 z-[1] opacity-20">
-                    <Image src={heroBg} alt="Hero background" objectFit="cover" layout="fill" />
+                    <Image src={hero} alt="Hero background" objectFit="cover" layout="fill" />
                 </div>
                 <div className="flex flex-col justify-center p-6 sm:p-24 h-full z-[2] relative">
                     <h2 className="font-extrabold text-white dark:text-white">

@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useEffect, useReducer } from "react";
 import axios from "axios";
 import CardSkeleton from "../../layouts/CardSkeleton";
-import goldIcon from '../../public/icons/gold.png';
+import { gold as goldIcon } from '../../public';
 import { getGoldReducer, INITIAL_STATE, GET_GOLD_ACTION_TYPE } from "./reducer/getGoldReducer";
 
 export default function GoldCurrentPrice(){
