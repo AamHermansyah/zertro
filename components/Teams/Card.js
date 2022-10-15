@@ -23,7 +23,7 @@ export default function Card({data}){
             </div>
             <div className="pt-4 ss:pt-8 flex border-t border-gray-200 w-44 mx-auto text-gray-500 items-center justify-center gap-x-4 sm:gap-x-8">
               {data.socialMedia.map((social, index) => (
-                <a href={`https://${social.link}`} target="_blank" key={index}>
+                <a href={`https://${social.link}`} target="_blank" rel="noopener noreferrer" key={index}>
                   {social.icon}
                 </a>
               ))}
