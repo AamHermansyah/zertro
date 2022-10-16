@@ -6,6 +6,7 @@ import gold from './icons/gold.png';
 import Whatsapp from './icons/Whatsapp';
 import Github from './icons/Github';
 import Instagram from './icons/Instagram';
+import DropdownArrow from './icons/DropdownArrow';
 
 export {
     delvan,
@@ -15,5 +16,6 @@ export {
     gold,
     Whatsapp,
     Github,
-    Instagram
+    Instagram,
+    DropdownArrow
 }

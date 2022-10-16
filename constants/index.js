@@ -1,4 +1,4 @@
-import { Github, Whatsapp, Instagram, aam, delvan, yuldan } from '../public';
+import { Github, Whatsapp, Instagram, aam, delvan, yuldan, DropdownArrow } from '../public';
 
 export const footer = {
     navigation: {
@@ -52,32 +52,52 @@ export const navbar = [
     {
         id: 'navbar-1',
         title: 'Home',
-        href: '#home',
+        href: '/dashboard',
     },
     {
         id: 'navbar-2',
-        title: 'Harga emas',
-        href: '#harga-emas',
+        title: 'Histori Harga',
+        href: '/dashboard/history',
+        icon: <DropdownArrow />,
+        child: [
+            {link: '/dashboard/history/annual', title: 'Pertahun'},
+            {link: '/dashboard/history/monthly', title: 'Perbulan'},
+        ]
     },
     {
         id: 'navbar-3',
-        title: 'Tabel laba',
-        href: '#tabel-laba',
+        title: 'Histori Tabel Laba',
+        href: '/dashboard/tabel-laba',
+        icon: <DropdownArrow />,
+        child: [
+            {link: '/dashboard/tabel-laba/', title: '1 Minggu Terakhir'},
+            {link: '/dashboard/tabel-laba/', title: '1 Bulan Terakhir'},
+            {link: '/dashboard/tabel-laba/6month', title: '6 Bulan Terakhir'},
+            {link: '/dashboard/tabel-laba/annual', title: 'Pertahun'},
+            {link: '/dashboard/tabel-laba/monthly', title: 'Perbulan'},
+        ]
     },
     {
         id: 'navbar-4',
         title: 'Prediksi',
-        href: '#prediksi',
+        href: '/dashboard/prediksi',
+        icon: <DropdownArrow />,
+        child: [
+            {link: '/dashboard/prediction', title: 'CAGR'},
+            {link: '/dashboard/prediction', title: 'Moving Average'},
+            {link: '/dashboard/prediction', title: 'MATSM'},
+            {link: '/dashboard/prediction', title: 'Forcasting Series'},
+        ]
     },
     {
         id: 'navbar-5',
         title: 'Donasi',
-        href: '#donasi',
+        href: '/donasi',
     },
     {
         id: 'navbar-6',
         title: 'Contact',
-        href: '#contact',
+        href: '/contact',
     },
 ]
 

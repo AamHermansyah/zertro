@@ -2,6 +2,7 @@ import Image from "next/image";
 import { useEffect, useReducer } from "react";
 import axios from "axios";
 import CardSkeleton from "../../layouts/CardSkeleton";
+import MiniCard from "./MiniCard";
 import { gold as goldIcon } from '../../public';
 import { getGoldReducer, INITIAL_STATE, GET_GOLD_ACTION_TYPE } from "./reducer/getGoldReducer";
 
@@ -49,8 +50,8 @@ export default function GoldCurrentPrice(){
 
     
     return (
-        <section id="harga-emas" className="mt-8 shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-800">
-          <div className="px-6 sm:w-[300px]">
+        <section id="harga-emas" className="sm:p-4">
+          <div className="px-6 sm:w-[300px] shadow-lg rounded-2xl py-4 bg-white">
             <h4 className="mb-4 font-semibold text-xl">Harga emas saat ini</h4>
             {loading ? 
               <CardSkeleton /> :
@@ -74,18 +75,31 @@ export default function GoldCurrentPrice(){
                     <span className="text-sm">$</span>
                   </p>
                 </div>
-                <div className="flex items-center justify-between text-gray-500 font-semibold text-sm">
-                  <div>
-                      Rendah: {" "}
-                      <span className="text-black">$1406.79</span>
-                  </div>
-                  <div>
-                      Tinggi: {" "}
-                      <span className="text-black">$1560.09</span>
-                  </div>
-                </div>
               </div>
             }
+          </div>
+
+          <div className="flex flex-wrap gap-6 my-6">
+            <MiniCard 
+            loading={loading}
+            title="Harga Tertinggi"
+            price={1234.56}
+            />
+            <MiniCard 
+            loading={loading}
+            title="Harga Tertinggi"
+            price={1234.56}
+            />
+            <MiniCard 
+            loading={loading}
+            title="Harga Tertinggi"
+            price={1234.56}
+            />
+            <MiniCard 
+            loading={loading}
+            title="Harga Tertinggi"
+            price={1234.56}
+            />
           </div>
         </section>
     )

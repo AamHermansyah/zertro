@@ -5,6 +5,7 @@ import Features from "../components/Features";
 import Teams from "../components/Teams";
 import AboutZetro from "../components/AboutZetro";
 import FAQs from "../components/FAQs";
+import CTA from "../components/CTA";
 
 export default function Home(){
   return (
@@ -46,6 +47,7 @@ export default function Home(){
           <AboutZetro />
           <Features />
           <Teams />
+          <CTA />
           <FAQs />
           <Footer />
         </div>
