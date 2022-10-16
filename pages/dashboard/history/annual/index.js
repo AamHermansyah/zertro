@@ -63,18 +63,18 @@ export default function History(){
     }, []);
 
     return (
-        <Navigation active="/dashboard/history/annual">
+        <Navigation active="/dashboard/history">
             <form className="mb-4">
                 <label htmlFor="price" className="block text-sm font-medium text-gray-700">
                 Filter
                 </label>
                 <div className="flex flex-wrap items-center gap-4">
-                    <div className="mt-1 relative rounded-md shadow-sm py-2 w-[300px] bg-white">
+                    <div className="mt-1 relative rounded-md shadow-sm py-2 w-full xs:w-[300px] bg-white">
                         <div className="absolute inset-y-0 left-0 flex items-center">
-                            <label htmlFor="currency" className="sr-only">
+                            <label htmlFor="years_from" className="sr-only">
                             Start
                             </label>
-                            <select id="years" name="years" className="focus:ring-indigo-500 py-2 px-4 border-t border-l border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-l-md" onChange={handleInputFilter} ref={inputStartRef} defaultValue="">
+                            <select id="years_from" name="years_from" className="focus:ring-indigo-500 py-2 px-4 border-t border-l border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-l-md" onChange={handleInputFilter} ref={inputStartRef} defaultValue="">
                                 {!isLoading ? inputFilter.from.map((year, index) => (
                                     <option key={index} value={index}>
                                         {year}
@@ -86,12 +86,17 @@ export default function History(){
                                 }
                             </select>
                         </div>
-                        <span className="w-full text-center block">Sampai</span>
+                        <span className="w-full text-center hidden xs:block">Sampai</span>
+                        <span className="h-6 block xs:hidden" />
                         <div className="absolute inset-y-0 right-0 flex items-center">
-                            <label htmlFor="years" className="sr-only">
+                            <label htmlFor="years_to" className="sr-only">
                             To
                             </label>
-                            <select id="years" name="years" className="focus:ring-indigo-500 py-2 px-4 border-t border-r border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-r-md" ref={inputToRef} defaultValue="">
+                            <select id="years_to" name="years_to" className="focus:ring-indigo-500 py-2 px-4 border-t border-r border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-r-md" ref={inputToRef} defaultValue="">
+                                {inputFilter.to.length > 0 && 
+                                    <option disabled selected>
+                                        to
+                                    </option>}
                                 {inputFilter.to.length > 0 ?
                                     inputFilter.to.map((year, index) =>(
                                         <option key={index} value={year}>

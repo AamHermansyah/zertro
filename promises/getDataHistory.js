@@ -4,10 +4,16 @@ export default function getDataHistory(json, config) {
             const dates = [];
             const filterYears = [];
             if(config?.from && config?.to){
-                json = json.filter((res, index) => {
-                    res = +res.Date.split('-')[0];
-                    return index >= +config.from && res <= +config.to
-                })
+                if(config?.type === 'slice'){
+                    const startIndex = json.findIndex(data => data.Date === config.from);
+                    const endIndex = json.findIndex(data => data.Date === config.to)
+                    json = json.slice(startIndex, endIndex + 1);
+                } else {
+                    json = json.filter((res, index) => {
+                        res = +res.Date.split('-')[0];
+                        return index >= +config.from && res <= +config.to
+                    })
+                }
             }
 
             if(config?.filterYears){

@@ -10,22 +10,80 @@ export default function History(){
     const router = useRouter();
     const [data, setData] = useState(null);
     const [inputFilter, setInputFilter] = useState({
-        from: [],
-        to: []
+        fromYear: [],
+        fromMonth: [],
+        toYear: [],
+        toMonth: []
     });
 
     const [isLoading, setIsLoading] = useState(true);
 
+    const inputFromYearRef = useRef();
+    const inputFromMonthRef = useRef();
+    const inputToYearRef = useRef();
+    const inputToMonthRef = useRef();
+
     const handleInputFilter = event => {
-        const value = event.target.value;
+        let isLastMonth = false;
+        const isSameYear = inputFromYearRef.current.value === inputToYearRef.current.value;
+
+        if(event.target.name === 'years_to'){
+            if(isSameYear){
+                setInputFilter(prev => ({
+                    ...prev,
+                    toMonth: prev.fromMonth.filter(value => value > inputFromMonthRef.current.value)
+                }))
+            } else {
+                setInputFilter(prev => ({
+                    ...prev,
+                    toMonth: prev.fromMonth
+                }))
+            }
+            return
+        }
+
+        if(event.target.name === 'month_from'){
+            const month_from = +inputFromMonthRef.current.value;
+            isLastMonth = month_from === 12 ? true : false;
+            setInputFilter(prev => ({
+                ...prev,
+                toMonth: month_from === 12 ? prev.fromMonth : isSameYear ? prev.fromMonth.filter(value => +value > month_from) : prev.fromMonth
+            }));
+        }
+
+        const value = inputFromYearRef.current.value;
+        const isSameMonth = inputFromMonthRef.current.value === inputToMonthRef.current.value;
+        
         setInputFilter(prev => ({
             ...prev,
-            to: prev.from.filter((data, index) => index > value)
+            toYear: prev.fromYear.filter((data) => isLastMonth ? data > value : data >= value),
+            toMonth: isSameYear && isSameMonth ? prev.fromMonth.slice(1) : prev.toMonth
         }))
     }
 
     const handleFilterButton = event => {
         event.preventDefault();
+        const fromYear = inputFromYearRef.current.value;
+        let fromMonth = +inputFromMonthRef.current.value;
+        fromMonth = fromMonth < 10 ? '0' + fromMonth : fromMonth;
+        const toYear = inputToYearRef.current.value;
+        let toMonth = +inputToMonthRef.current.value;
+        toMonth = toMonth < 10 ? '0' + toMonth : toMonth;
+
+        const config = {
+            from: fromYear + '-' + fromMonth,
+            to: toYear + '-' + toMonth,
+            type: 'slice'
+        }
+
+        getDataHistory(gold_price_monthly, config)
+        .then(res => {
+            setData(res.data);
+        })
+        .catch(err => {
+            alert(err);
+            router.push('/dashboard');
+        })
     }
 
     useEffect(() => {
@@ -36,12 +94,14 @@ export default function History(){
         getDataHistory(gold_price_monthly, config)
             .then(res => {
                 setTimeout(() => {
-                    console.log(res.data);
                     setData(res.data);
-                    setInputFilter({
-                        from: res.data.filterYears,
-                        to: Array.from({length: 12}).map((arr, index) => index + 1)
-                    });
+                    setInputFilter(prev => ({
+                        ...prev,
+                        fromYear: res.data.filterYears,
+                        fromMonth: Array.from({length: 12}).map((arr, index) => index + 1),
+                        toYear: res.data.filterYears,
+                        toMonth: Array.from({length: 10}).map((arr, index) => index + 2),
+                    }));
                     setIsLoading(false);
                 }, 3000);
             })
@@ -52,21 +112,27 @@ export default function History(){
     }, []);
 
     return (
-        <Navigation active="/dashboard/history/annual">
+        <Navigation active="/dashboard/history">
             <form className="mb-4 flex flex-wrap gap-4">
                 <div>
                     <label htmlFor="price" className="block text-sm font-medium text-gray-700">
                     dari tahun
                     </label>
                     <div className="flex flex-wrap items-center gap-4">
-                        <div className="mt-1 relative rounded-md shadow-sm py-2 w-[300px] bg-white">
+                        <div className="mt-1 relative rounded-md shadow-sm py-2 w-[87vw] xs:w-[300px] bg-white">
                             <div className="absolute inset-y-0 left-0 flex items-center">
-                                <label htmlFor="currency" className="sr-only">
-                                Start
+                                <label htmlFor="years_from" className="sr-only">
+                                dari tahun
                                 </label>
-                                <select id="years" name="years" className="focus:ring-indigo-500 py-2 px-4 border-t border-l border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-l-md" onChange={handleInputFilter} defaultValue="">
-                                    {!isLoading ? inputFilter.from.map((year, index) => (
-                                        <option key={index} value={index}>
+                                <select 
+                                id="years_from" 
+                                name="years_from" 
+                                className="focus:ring-indigo-500 py-2 px-4 border-t border-l border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-l-md" 
+                                onChange={handleInputFilter} 
+                                defaultValue=""
+                                ref={inputFromYearRef}>
+                                    {!isLoading ? inputFilter.fromYear.map((year, index) => (
+                                        <option key={index} value={year}>
                                             {year}
                                         </option>
                                     )) :
@@ -76,20 +142,27 @@ export default function History(){
                                     }
                                 </select>
                             </div>
-                            <span className="w-full text-center block">Bulan</span>
+                            <span className="w-full text-center hidden xs:block">Bulan</span>
+                            <span className="h-6 block xs:hidden" />
                             <div className="absolute inset-y-0 right-0 flex items-center">
-                                <label htmlFor="years" className="sr-only">
-                                To
+                                <label htmlFor="month_from" className="sr-only">
+                                bulan ke
                                 </label>
-                                <select id="years" name="years" className="focus:ring-indigo-500 py-2 px-4 border-t border-r border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-r-md" defaultValue="">
-                                    {inputFilter.to.length > 0 ?
-                                        inputFilter.to.map((year, index) =>(
-                                            <option key={index} value={year}>
-                                                {year}
+                                <select 
+                                id="month_from" 
+                                name="month_from" 
+                                className="focus:ring-indigo-500 py-2 px-4 border-t border-r border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-r-md" 
+                                defaultValue=""
+                                onChange={handleInputFilter}
+                                ref={inputFromMonthRef}>
+                                    {inputFilter.fromMonth.length > 0 ?
+                                        inputFilter.fromMonth.map((month, index) =>(
+                                            <option key={index} value={month}>
+                                                {month}
                                             </option>
                                         )) :
                                         <option disabled selected>
-                                            to
+                                            from
                                         </option>
                                     } 
                                 </select>
@@ -102,26 +175,52 @@ export default function History(){
                     sampai tahun
                     </label>
                     <div className="flex flex-wrap items-center gap-4">
-                        <div className="mt-1 relative rounded-md shadow-sm py-2 w-[300px] bg-white">
+                        <div className="mt-1 relative rounded-md shadow-sm py-2 w-[87vw] xs:w-[300px] bg-white">
                             <div className="absolute inset-y-0 left-0 flex items-center">
-                                <label htmlFor="currency" className="sr-only">
-                                Start
+                                <label htmlFor="years_to" className="sr-only">
+                                sampai tahun
                                 </label>
-                                <select id="years" name="years" className="focus:ring-indigo-500 py-2 px-4 border-t border-l border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-l-md" defaultValue="">
-                                    <option>
-                                        Loading...
+                                <select 
+                                id="years_to" 
+                                name="years_to" 
+                                className="focus:ring-indigo-500 py-2 px-4 border-t border-l border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-l-md" 
+                                defaultValue=""
+                                ref={inputToYearRef}
+                                onChange={handleInputFilter}>
+                                    {inputFilter.toYear.length > 0 ? 
+                                    inputFilter.toYear.map((year, index) => (
+                                        <option key={index} value={year}>
+                                            {year}
+                                        </option>
+                                    )) :
+                                    <option selected>
+                                        to
                                     </option>
+                                    }
                                 </select>
                             </div>
-                            <span className="w-full text-center block">Bulan</span>
+                            <span className="w-full text-center hidden xs:block">Sampai</span>
+                            <span className="h-6 block xs:hidden" />
                             <div className="absolute inset-y-0 right-0 flex items-center">
-                                <label htmlFor="years" className="sr-only">
-                                To
+                                <label htmlFor="month_to" className="sr-only">
+                                bulan ke
                                 </label>
-                                <select id="years" name="years" className="focus:ring-indigo-500 py-2 px-4 border-t border-r border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-r-md" defaultValue="">
+                                <select 
+                                id="month_to" 
+                                name="month_to" 
+                                className="focus:ring-indigo-500 py-2 px-4 border-t border-r border-gray-300 border-b bo focus:border-indigo-500 h-full pl-2 pr-7 border-transparent bg-transparent text-gray-500 sm:text-sm rounded-r-md" 
+                                defaultValue=""
+                                ref={inputToMonthRef}>
+                                    {inputFilter.toMonth.length > 0 ?
+                                        inputFilter.toMonth.map((month, index) =>(
+                                            <option key={index} value={month}>
+                                                {month}
+                                            </option>
+                                        )) :
                                         <option disabled selected>
                                             to
                                         </option>
+                                    }
                                 </select>
                             </div>
                         </div>
