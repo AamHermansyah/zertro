@@ -38,7 +38,7 @@ export default function GoldCurrentPrice(){
             dispatch({
             type: GET_GOLD_ACTION_TYPE.FETCH_SUCCES,
             payload: {
-                metal: "AUG",
+                metal: "XAU",
                 ch: -5.7,
                 chp: -1.2,
                 price: 1667.46
@@ -87,18 +87,23 @@ export default function GoldCurrentPrice(){
             />
             <MiniCard 
             loading={loading}
-            title="Harga Tertinggi"
+            title="Laba 1 Hari"
             price={1234.56}
             />
             <MiniCard 
             loading={loading}
-            title="Harga Tertinggi"
-            price={1234.56}
+            title="Prediksi CAGR"
+            price="12.4%"
             />
             <MiniCard 
             loading={loading}
-            title="Harga Tertinggi"
-            price={1234.56}
+            title="Prediksi MA"
+            price="1.3%"
+            />
+            <MiniCard 
+            loading={loading}
+            title="Prediksi LSTM"
+            price="6.5%"
             />
           </div>
         </section>

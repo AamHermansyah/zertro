@@ -57,7 +57,6 @@ export default function History(){
         setInputFilter(prev => ({
             ...prev,
             toYear: prev.fromYear.filter((data) => isLastMonth ? data > value : data >= value),
-            toMonth: isSameYear && isSameMonth ? prev.fromMonth.slice(1) : prev.toMonth
         }))
     }
 
@@ -100,7 +99,7 @@ export default function History(){
                         fromYear: res.data.filterYears,
                         fromMonth: Array.from({length: 12}).map((arr, index) => index + 1),
                         toYear: res.data.filterYears,
-                        toMonth: Array.from({length: 10}).map((arr, index) => index + 2),
+                        toMonth: Array.from({length: 12}).map((arr, index) => index + 1),
                     }));
                     setIsLoading(false);
                 }, 3000);

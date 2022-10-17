@@ -30,7 +30,7 @@ export default function getDataHistory(json, config) {
             if(!prices || !dates) reject('Data tidak ada atau kosong');
             resolve({
                 data: { 
-                    prices, 
+                    prices: [prices], 
                     dates, 
                     filterYears: config?.filterYears ? filterYears : null
                 }

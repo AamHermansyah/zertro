@@ -121,7 +121,6 @@ export default function History(){
                 <ChartGold 
                 data={data}
                 title="Histori harga emas pertahun (1950 - 2021)" 
-                color="rgb(55, 48, 163)"
                 label="Harga Emas" />
             }
         </Navigation>
