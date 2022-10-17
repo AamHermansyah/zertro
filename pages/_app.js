@@ -12,6 +12,8 @@ import {
   LineController
 } from 'chart.js';
 import ContextProvider from '../context/ContextProvider';
+import { Provider } from 'react-redux';
+import store from '../app/store';
 
 ChartJS.register(
   CategoryScale,
@@ -36,9 +38,11 @@ function MyApp({ Component, pageProps }) {
         <title>Zetro - AI Prediksi Harga Emas</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ContextProvider>
-        <Component {...pageProps} />
-      </ContextProvider>
+      <Provider store={store}>
+        <ContextProvider>
+          <Component {...pageProps} />
+        </ContextProvider>
+      </Provider>
     </>
   )
 }

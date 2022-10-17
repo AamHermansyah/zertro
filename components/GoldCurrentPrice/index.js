@@ -2,7 +2,7 @@ import Image from "next/image";
 import { useEffect, useReducer } from "react";
 import axios from "axios";
 import CardSkeleton from "../../layouts/CardSkeleton";
-import MiniCard from "./MiniCard";
+import MiniCard from "../MiniCard";
 import { gold as goldIcon } from '../../public';
 import { getGoldReducer, INITIAL_STATE, GET_GOLD_ACTION_TYPE } from "./reducer/getGoldReducer";
 
@@ -50,12 +50,12 @@ export default function GoldCurrentPrice(){
 
     
     return (
-        <section id="harga-emas" className="sm:p-4">
-          <div className="px-6 sm:w-[300px] shadow-lg rounded-2xl py-4 bg-white">
-            <h4 className="mb-4 font-semibold text-xl">Harga emas saat ini</h4>
+        <section id="harga-emas" className="sm:p-4 mb-4">
+          <div className="flex flex-wrap gap-4 md:gap-6 items-end">
             {loading ? 
               <CardSkeleton /> :
-              <div>
+              <div className="bg-white px-6 sm:w-[300px] shadow-lg rounded-2xl py-4">
+                <h4 className="mb-4 font-semibold text-xl">Harga emas saat ini</h4>
                 <div className="flex items-center">
                   <span className="rounded-xl w-8 h-8 relative p-4 bg-purple-200 overflow-hidden">
                     <Image src={goldIcon} alt="gold icon" objectFit="cover" layout="fill" />
@@ -77,34 +77,41 @@ export default function GoldCurrentPrice(){
                 </div>
               </div>
             }
+            <MiniCard 
+            loading={loading}
+            title="Harga Kemarin"
+            data="$1546.09"
+            />
+            <MiniCard 
+            loading={loading}
+            title="Laba 1 Hari (USD)"
+            data="$1.2"
+            />
+            <MiniCard 
+            loading={loading}
+            title="Laba 1 Hari (%)"
+            data="0.21%"
+            />
           </div>
-
-          <div className="flex flex-wrap gap-6 my-6">
-            <MiniCard 
-            loading={loading}
-            title="Harga Tertinggi"
-            price={1234.56}
-            />
-            <MiniCard 
-            loading={loading}
-            title="Laba 1 Hari"
-            price={1234.56}
-            />
-            <MiniCard 
-            loading={loading}
-            title="Prediksi CAGR"
-            price="12.4%"
-            />
-            <MiniCard 
-            loading={loading}
-            title="Prediksi MA"
-            price="1.3%"
-            />
-            <MiniCard 
-            loading={loading}
-            title="Prediksi LSTM"
-            price="6.5%"
-            />
+          <div>
+          <h1 className="text-2xl sm:text-3xl font-bold mt-8 mb-4 text-gray-800">Prediksi satu tahun kedepan</h1>
+            <div className="flex flex-wrap gap-4 md:gap-6">
+              <MiniCard 
+                loading={loading}
+                title="Prediksi CAGR"
+                data="12.4%"
+                />
+                <MiniCard 
+                loading={loading}
+                title="Prediksi MA"
+                data="1.3%"
+                />
+                <MiniCard 
+                loading={loading}
+                title="Prediksi LSTM"
+                data="6.5%"
+                />
+            </div>
           </div>
         </section>
     )

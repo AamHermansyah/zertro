@@ -86,7 +86,7 @@ export default function History(){
                                 }
                             </select>
                         </div>
-                        <span className="w-full text-center hidden xs:block">Sampai</span>
+                        <span className="w-full text-center hidden xxs:block">Sampai</span>
                         <span className="h-6 block xs:hidden" />
                         <div className="absolute inset-y-0 right-0 flex items-center">
                             <label htmlFor="years_to" className="sr-only">
@@ -118,10 +118,18 @@ export default function History(){
             </form>
             {isLoading ?
                 <ChartSkeleton /> :
-                <ChartGold 
-                data={data}
-                title="Histori harga emas pertahun (1950 - 2021)" 
-                label="Harga Emas" />
+                <div>
+                    <ChartGold 
+                    data={data}
+                    title="Histori harga emas pertahun (1950 - 2021)" 
+                    label="Harga Emas" />
+                    <div className="flex font-thin text-sm p-2">
+                        <span className="mr-2">Source:</span>
+                        <Link href="https://github.com/datasets/gold-prices/blob/master/data/annual.csv">
+                            <a className="underline" target="_blank" rel="noopener noreferrer">https://github.com/datasets/gold-prices/</a>
+                        </Link>
+                    </div>
+                </div>
             }
         </Navigation>
     )
