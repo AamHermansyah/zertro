@@ -20,7 +20,8 @@ export default function ChartGold({data, label, title, color, type, background})
         },
         aspectRatio: width > 768 ? 2 : 1,
         scales: {
-            y: {
+            yAxis: {
+                display: true,
                 ticks: {
                     callback: function(value, index, ticks) {
                         return '$' + value;

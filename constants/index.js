@@ -106,7 +106,7 @@ export const teams = [
         name: 'Aam Hermansyah',
         photo: aam,
         born: '03 Maret, 2003 di Garut, Jawa Barat, Indonesia.',
-        job: 'Mahasiswa',
+        job: 'Mahasiswa Informatika UNSIL',
         socialMedia: [
             { 
                 link: 'instagram.com/aamhrmnsyah',
@@ -126,7 +126,7 @@ export const teams = [
         name: 'Delvan Ramadhan',
         photo: delvan,
         born: '05 November, 2003 di Tasikmalaya, Jawa Barat, Indonesia.',
-        job: 'Mahasiswa',
+        job: 'Mahasiswa Informatika UNSIL',
         socialMedia: [
             { 
                 link: 'instagram.com/_dererere',
@@ -142,7 +142,7 @@ export const teams = [
         name: 'Yuldan Nur Addinsyah',
         photo: yuldan,
         born: '14 Juli, 2004 di Cilacap, Jawa Tengah, Indonesia.',
-        job: 'Mahasiswa',
+        job: 'Mahasiswa Informatika UNSIL',
         socialMedia: [
             { 
                 link: 'instagram.com/yuldan_png',

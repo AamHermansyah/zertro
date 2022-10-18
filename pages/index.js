@@ -29,19 +29,17 @@ export default function Home(){
         <div className="sm:p-4">
           <Hero />
           <section className="mt-6">
-            <div className="dark:bg-gray-800">
-              <div className="text-right py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
-                <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
-                  <span className="block">
-                    Ingin berinvestasi {" "}
-                    <br className="sm:hidden" />
-                    dengan aman ?
-                  </span>
-                  <span className="block text-primary">
-                    Sekarang atau tidak selamanya
-                  </span>
-                </h2>
-              </div>
+            <div className="text-right py-12 px-4 sm:px-6 lg:py-16 lg:px-8 z-20">
+              <h2 className="text-3xl sm:text-5xl font-extrabold text-gray-800 dark:text-white">
+                <span className="block">
+                  Ingin berinvestasi {" "}
+                  <br className="sm:hidden" />
+                  dengan aman ?
+                </span>
+                <span className="block text-primary">
+                  Sekarang atau tidak selamanya
+                </span>
+              </h2>
             </div>
           </section>
           <AboutZetro />

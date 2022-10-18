@@ -13,20 +13,25 @@ export default function ThreeMonthChart({loading}){
                 <ChartSkeleton /> :
                 <div>
                     <div className="flex flex-wrap gap-6 my-6 px-4">
+                    <MiniCard 
+                        loading={loading}
+                        title="Harga Terendah"
+                        data={`$${data.low_price}`}
+                        />
                         <MiniCard 
                         loading={loading}
                         title="Harga Tertinggi"
-                        data={1234.56}
+                        data={`$${data.high_price}`}
                         />
                         <MiniCard 
                         loading={loading}
                         title="Laba 3 Bulan (USD)"
-                        data="$1.2"
+                        data={`$${data.ch}`}
                         />
                         <MiniCard 
                         loading={loading}
                         title="Laba 3 Bulan (%)"
-                        data="0.21%"
+                        data={`${data.chp}%`}
                         />
                     </div>
                     <ChartGold

@@ -12,16 +12,16 @@ const data = [
         description: 'Zetro diciptakan oleh tiga mahasiswa Universitas Siliwangi jurusan Informatika angkatan 2022, yaitu Aam Hermansyah, Delvan Ramadhan, dan Yuldan Nur Addinsyah. Didirikan pada tahun 2022 dimana ekonomi dunia mulai bangkit kembali setelah pasca pandemi Covid-19 yang mengakibatkan resesi ekonomi global. Zetro hadir untuk membantu ekonomi nasional dan umumnya global untuk membangkitkan kembali ekonomi dengan cepat.'
     },
     {
-        question: 'Berapa persen akurasi dari prediksi Zetro?',
-        description: 'A home energy rating is an estimated calculation into a homes potential energy usage, which will determine the amount of heating and cooling required to make its occupants comfortable. It produces a star rating dependant on the amount of heating and cooling loads which will be required, from 0 to 10 stars.'
+        question: 'Saya menggunakan Zetro tetapi kenapa prediksinya kurang tepat?',
+        description: 'Artificial Intellegence pada Zetro dibuat dengan algoritma time series forecasting. Dia bekerja dengan cara mengolah data histori dari harga emas sebelumnya. Jadi, prediksi ini bukan merupakan 100% prediksi yang tepat, ini sebagai patokan anda dalam melakukan investasi emas dengan melihat beberapa data histori kebelakang yang di bantu dengan AI dari sistem Zetro kami.'
     },
     {
         question: 'Apa keuntungan saya menggunakan Zetro?',
-        description: 'Membantu para investor dalam melakukan investasi emas dengan mempertimbangkan prediksi harga emas dari sistem Zetro. Kami menghadirkan beberapa fitur yang menampilkan prediksi harga emas dari beberapa algoritma yang kami gunakan. Dan keuntungan utamanya yaitu ini semua gratis!'
+        description: 'Membantu para investor dalam melakukan investasi emas dengan mempertimbangkan prediksi harga emas dari sistem Zetro. Kami menghadirkan beberapa fitur yang menampilkan prediksi harga emas dari beberapa algoritma yang kami gunakan.'
     },
     {
-        question: 'Saya menggunakan Zetro tetapi kenapa prediksinya kurang tepat?',
-        description: 'Artificial Intellegence pada Zetro dibuat dengan algoritma time series forecasting. Dia bekerja dengan cara mengolah data histori dari harga emas sebelumnya. Jadi, prediksi ini bukan merupakan 100% prediksi yang tepat, ini sebagai patokan anda dalam melakukan investasi emas dengan melihat beberapa data histori kebelakang yang di bantu dengan AI dari sistem Zetro kami.'
+        question: 'Apakah zetro gratis?',
+        description: 'Zetro melayani anda 100% gratis dengan kemudahan yang telah kami sediakan semoga dapat membantu anda dalam berinvestasi emas.'
     },
 ]
 

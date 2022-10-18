@@ -70,7 +70,7 @@ export default function History(){
                 Filter
                 </label>
                 <div className="flex flex-wrap items-center gap-4">
-                    <div className="mt-1 relative rounded-md shadow-sm py-2 w-full xs:w-[300px] bg-white">
+                    <div className="flex items-center justify-center mt-1 relative rounded-md shadow-sm py-2 w-full xs:w-[300px] bg-white">
                         <div className="absolute inset-y-0 left-0 flex items-center">
                             <label htmlFor="years_from" className="sr-only">
                             Start
@@ -124,7 +124,7 @@ export default function History(){
                     data={data}
                     title="Histori harga emas pertahun (1950 - 2021)" 
                     label="Harga Emas" />
-                    <div className="flex font-thin text-sm p-2">
+                    <div className="flex font-thin text-md p-2">
                         <span className="mr-2">Source:</span>
                         <Link href="https://github.com/datasets/gold-prices/blob/master/data/annual.csv">
                             <a className="underline" target="_blank" rel="noopener noreferrer">https://github.com/datasets/gold-prices/</a>

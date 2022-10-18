@@ -19,6 +19,7 @@ export default function Home(){
   const [isLoading, setIsLoading] = useState(true);
   const gold_price = useSelector(state => state.gold_price);
   const dispatch = useDispatch();
+  // console.log(gold_price);
 
   // useEffect(() => {
   //   let now = new Date();

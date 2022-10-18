@@ -4,7 +4,7 @@ export default function MiniCard({loading, title, data}){
             {loading ?
             <div className="h-full w-full rounded-md bg-gray-300 animate-pulse"></div> :
             <>
-                <p className="text-md text-gray-700 dark:text-gray-50">{title}</p>
+                <p className="text-md text-gray-700 dark:text-gray-50 text-center">{title}</p>
                 <p className="text-gray-800 text-2xl ss:text-3xl text-left dark:text-white font-bold">{data}</p>
             </>
             }
