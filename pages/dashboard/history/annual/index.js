@@ -5,6 +5,7 @@ import getDataHistory from "../../../../promises/getDataHistory";
 import gold_price_annual from "../../../../constants/json/gold_price_annual.json";
 import { useRouter } from "next/router";
 import ChartSkeleton from "../../../../layouts/ChartSKeleton";
+import Link from "next/link";
 
 export default function History(){
     const router = useRouter();

@@ -238,7 +238,7 @@ export default function History(){
                         <ChartGold 
                         data={data}
                         title="Histori harga emas perbulan (1950 - 2022)" 
-                        color="#FB2576"
+                        color="#EB1D36"
                         label="Harga Emas" />
                         <div className="flex font-thin text-sm p-2">
                             <span className="mr-2">Source:</span>

@@ -3,12 +3,12 @@ import ChartSkeleton from "../layouts/ChartSKeleton";
 import ChartGold from "./ChartGold";
 import MiniCard from "./MiniCard";
 
-export default function OneWeekChart({loading}){
-    const data = useSelector(state => state.gold_price.oneWeek);
+export default function TwoWeekChart({loading}){
+    const data = useSelector(state => state.gold_price.twoWeek);
     
     return (
         <section id="one_week_chart">
-            <h1 className="text-2xl sm:text-3xl font-bold mt-8 mx-4 mb-4 text-gray-800">7 Hari Terakhir</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold mt-8 mx-4 mb-4 text-gray-800">14 Hari Terakhir</h1>
             {loading ?
                 <ChartSkeleton /> :
                 <div>
@@ -20,17 +20,17 @@ export default function OneWeekChart({loading}){
                         />
                         <MiniCard 
                         loading={loading}
-                        title="Laba 7 Hari (USD)"
+                        title="Laba 14 Hari (USD)"
                         data="$1.2"
                         />
                         <MiniCard 
                         loading={loading}
-                        title="Laba 7 Hari (%)"
+                        title="Laba 14 Hari (%)"
                         data="0.21%"
                         />
                     </div>
                     <ChartGold
-                    title="Harga 7 Hari Terakhir"
+                    title="Harga 14 Hari Terakhir"
                     data={data}
                     />
                 </div>

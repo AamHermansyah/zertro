@@ -1,10 +1,10 @@
 import { Chart } from "react-chartjs-2";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 
-const COLORS = ['#FB2576', 'rgb(55, 48, 163)', '#EAE509'];
-const LABELS = ['EUR', 'XAG', 'XAU'];
+const COLORS = ['rgb(55, 48, 163)', '#EB1D36', '#EAE509'];
+const LABELS = ['XAU', 'EUR', 'XAG'];
 
-export default function ChartGold({data, label, title, color, type}){
+export default function ChartGold({data, label, title, color, type, background}){
     const { width } = useWindowDimensions();
     const config = {
         responsive: true,
@@ -46,7 +46,7 @@ export default function ChartGold({data, label, title, color, type}){
                         data: price,
                         borderColor: color ? color : COLORS[index],
                         backgroundColor: type && type !== 'line' ? color[index] : 'transparent',
-                        tension: 0.5
+                        tension: 0.5,
                     }))
                 }}
                 options={config}
