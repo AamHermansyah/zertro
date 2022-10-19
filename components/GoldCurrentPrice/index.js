@@ -54,7 +54,7 @@ export default function GoldCurrentPrice(){
           <div className="flex flex-wrap gap-4 md:gap-6 items-end">
             {loading ? 
               <CardSkeleton /> :
-              <div className="bg-white px-6 sm:w-[300px] shadow-lg rounded-2xl py-4">
+              <div className="bg-white px-6 sm:w-[300px] shadow-sm rounded-2xl py-4">
                 <h4 className="mb-4 font-semibold text-xl">Harga emas saat ini</h4>
                 <div className="flex items-center">
                   <span className="rounded-xl w-8 h-8 relative p-4 bg-purple-200 overflow-hidden">
@@ -94,21 +94,21 @@ export default function GoldCurrentPrice(){
             />
           </div>
           <div>
-          <h1 className="text-2xl sm:text-3xl font-bold mt-8 mb-4 text-gray-800">Prediksi satu tahun kedepan</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold mt-8 mb-4 text-gray-800">Prediksi laba satu tahun kedepan</h1>
             <div className="flex flex-wrap gap-4 md:gap-6">
               <MiniCard 
                 loading={loading}
-                title="Prediksi CAGR"
+                title="CAGR"
                 data="12.4%"
                 />
                 <MiniCard 
                 loading={loading}
-                title="Prediksi MA"
+                title="Moving Average"
                 data="1.3%"
                 />
                 <MiniCard 
                 loading={loading}
-                title="Prediksi LSTM"
+                title="Linear Regression"
                 data="6.5%"
                 />
             </div>

@@ -80,13 +80,12 @@ export const navbar = [
     {
         id: 'navbar-4',
         title: 'Prediksi',
-        href: '/dashboard/prediksi',
+        href: '/dashboard/prediction',
         icon: <DropdownArrow />,
         child: [
-            {link: '/dashboard/prediction', title: 'CAGR'},
-            {link: '/dashboard/prediction', title: 'Moving Average'},
-            {link: '/dashboard/prediction', title: 'MATSM'},
-            {link: '/dashboard/prediction', title: 'Forcasting Series'},
+            {link: '/dashboard/prediction/CAGR', title: 'CAGR'},
+            {link: '/dashboard/prediction/moving-average', title: 'Moving Average'},
+            {link: '/dashboard/prediction/linear-regression', title: 'Linear Regression'},
         ]
     },
     {

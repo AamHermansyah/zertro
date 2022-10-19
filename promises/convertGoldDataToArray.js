@@ -1,13 +1,8 @@
 import { CONFIG_DATE } from "../utils/config";
-import { countCAGR, countLossAndProfit, getMaxLowNumber } from "../utils/utilsForNumber";
+import { countLossAndProfit, getMaxLowNumber } from "../utils/utilsForNumber";
 
 const handleGetGoldDataDetail = res => {
     const data = {...res};
-    const periode = data.prices.length
-    const close_price = data.prices[periode - 1];
-    const open_price = data.prices[0];
-    
-    const CAGR = countCAGR(open_price, close_price, periode);
 
     const {min, max} = getMaxLowNumber(data.prices);
     const {ch, chp} = countLossAndProfit(data.prices);
@@ -17,8 +12,7 @@ const handleGetGoldDataDetail = res => {
         high_price: max,
         low_price: min,
         ch,
-        chp,
-        CAGR
+        chp
     }
 }
 

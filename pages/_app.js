@@ -14,6 +14,7 @@ import {
 import ContextProvider from '../context/ContextProvider';
 import { Provider } from 'react-redux';
 import store from '../app/store';
+import ProviderWraper from '../app/ProviderWraper';
 
 ChartJS.register(
   CategoryScale,
@@ -40,7 +41,9 @@ function MyApp({ Component, pageProps }) {
       </Head>
       <Provider store={store}>
         <ContextProvider>
-          <Component {...pageProps} />
+          <ProviderWraper>
+            <Component {...pageProps} />
+          </ProviderWraper>
         </ContextProvider>
       </Provider>
     </>
