@@ -17,6 +17,5 @@ export function countLossAndProfit(arr){
 }
 
 export function countCAGR(open_price, close_price, periode){
-    const result = (Math.pow((close_price / open_price), 1 / periode) - 1) * 100;
-    return +Number(result).toFixed(2);
+    return +Number((Math.pow((close_price / open_price), 1 / periode) - 1) * 100).toFixed(2);
 }

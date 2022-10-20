@@ -27,11 +27,13 @@ export default function OneMonthChart({loading}){
                         loading={loading}
                         title="Laba 30 Hari (USD)"
                         data={`$${data.ch}`}
+                        indicator={data.ch >= 0 ? 1 : -1}
                         />
                         <MiniCard 
                         loading={loading}
                         title="Laba 30 Hari (%)"
                         data={`${data.chp}%`}
+                        indicator={data.ch >= 0 ? 1 : -1}
                         />
                     </div>
                     <ChartGold

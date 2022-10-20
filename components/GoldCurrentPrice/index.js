@@ -84,12 +84,12 @@ export default function GoldCurrentPrice(){
             />
             <MiniCard 
             loading={loading}
-            title="Laba 1 Hari (USD)"
+            title="Laba Kemarin"
             data="$1.2"
             />
             <MiniCard 
             loading={loading}
-            title="Laba 1 Hari (%)"
+            title="Laba Kemarin (%)"
             data="0.21%"
             />
           </div>

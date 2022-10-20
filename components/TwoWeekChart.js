@@ -27,11 +27,13 @@ export default function TwoWeekChart({loading}){
                         loading={loading}
                         title="Laba 14 Hari (USD)"
                         data={`$${data.ch}`}
+                        indicator={data.ch >= 0 ? 1 : -1}
                         />
                         <MiniCard 
                         loading={loading}
                         title="Laba 14 Hari (%)"
                         data={`${data.chp}%`}
+                        indicator={data.ch >= 0 ? 1 : -1}
                         />
                     </div>
                     <ChartGold

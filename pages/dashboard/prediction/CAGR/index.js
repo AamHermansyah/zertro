@@ -1,22 +1,40 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import ChartGold from "../../../../components/ChartGold";
 import MiniCard from "../../../../components/MiniCard";
 import Navigation from "../../../../layouts/Navigation";
 import ChartSkeleton from "../../../../layouts/ChartSKeleton";
+import { CONFIG_DATE } from "../../../../utils/config";
+import { useEffect } from "react";
+import handleCAGRPrediction from "../../../../promises/handleCAGRPrediction";
+import { setLoadingFetchDataPrediction } from "../../../../app/features/prediction/predictionSlice";
 
 const buttons = [
-    {title: '7 Hari', value: 7},
-    {title: '14 Hari', value: 14},
-    {title: '30 Hari', value: 30},
-    {title: '3 Bulan', value: 90},
-    {title: '6 Bulan', value: 180},
-    {title: '1 Tahun', value: 365},
-    {title: 'All Years', value: 'all'},
+    {title: '7 Hari', value: CONFIG_DATE.ONE_WEEK},
+    {title: '14 Hari', value: CONFIG_DATE.TWO_WEEK},
+    {title: '30 Hari', value: CONFIG_DATE.ONE_MONTH},
+    {title: '3 Bulan', value: CONFIG_DATE.THREE_MONTH},
+    {title: '6 Bulan', value: CONFIG_DATE.SIX_MONTH},
+    {title: '1 Tahun', value: CONFIG_DATE.ONE_YEAR},
+    {title: '6 Tahun', value: CONFIG_DATE.ONE_YEAR * 6},
 ]
 
 export default function OneWeekChart(){
-    const loading = useSelector(state => state.gold_price.loading)
-    const data = useSelector(state => state.gold_price.oneWeek);
+    const loading = useSelector(state => state.prediction_data.loading)
+    const dataOneWeek = useSelector(state => state.gold_price.oneWeek);
+    const prediction_data = useSelector(state => state.prediction_data.CAGR.oneWeek)
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        if(dataOneWeek.prices.length > 0){
+            handleCAGRPrediction(dataOneWeek.prices[0])
+            .then(res => {
+                console.log(res);
+            })
+            .finally(() => {
+                dispatch(setLoadingFetchDataPrediction());
+            })
+        }
+    }, [loading, dataOneWeek.prices]);
     
     return (
         <Navigation active="/dashboard/prediction">
@@ -35,32 +53,58 @@ export default function OneWeekChart(){
                     <MiniCard 
                     loading={loading}
                     title="7 Hari Kedepan"
-                    data={`${data.low_price}%`}
+                    data={`${dataOneWeek.ch}%`}
+                    indicator={dataOneWeek.ch >= 0 ? 1 : -1}
+                    label={true}
                     />
                     <MiniCard 
                     loading={loading}
                     title="14 Hari Kedepan"
-                    data={`${data.high_price}%`}
+                    data={`${dataOneWeek.ch}%`}
+                    indicator={dataOneWeek.ch >= 0 ? 1 : -1}
+                    label={true}
                     />
                     <MiniCard 
                     loading={loading}
                     title="30 Hari Kedepan"
-                    data={`${data.ch}%`}
+                    data={`${dataOneWeek.ch}%`}
+                    indicator={dataOneWeek.ch >= 0 ? 1 : -1}
+                    label={true}
                     />
                     <MiniCard 
                     loading={loading}
                     title="3 Bulan Kedepan"
-                    data={`${data.chp}%`}
+                    data={`${dataOneWeek.chp}%`}
+                    indicator={dataOneWeek.ch >= 0 ? 1 : -1}
+                    label={true}
                     />
                     <MiniCard 
                     loading={loading}
                     title="6 Bulan Kedepan"
-                    data={`${data.chp}%`}
+                    data={`${dataOneWeek.chp}%`}
+                    indicator={dataOneWeek.ch >= 0 ? 1 : -1}
+                    label={true}
                     />
                     <MiniCard 
                     loading={loading}
                     title="1 Tahun Kedepan"
-                    data={`${data.chp}%`}
+                    data={`${dataOneWeek.chp}%`}
+                    indicator={dataOneWeek.ch >= 0 ? 1 : -1}
+                    label={true}
+                    />
+                    <MiniCard 
+                    loading={loading}
+                    title="3 Tahun Kedepan"
+                    data={`${dataOneWeek.chp}%`}
+                    indicator={dataOneWeek.ch >= 0 ? 1 : -1}
+                    label={true}
+                    />
+                    <MiniCard 
+                    loading={loading}
+                    title="6 Tahun Kedepan"
+                    data={`${dataOneWeek.chp}%`}
+                    indicator={dataOneWeek.ch >= 0 ? 1 : -1}
+                    label={true}
                     />
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4 sm:mb-2">
@@ -75,7 +119,7 @@ export default function OneWeekChart(){
                     <ChartSkeleton /> :
                     <ChartGold
                     title="Grafik 7 Hari Terakhir"
-                    data={data}
+                    data={dataOneWeek}
                     />
                 }
             </section>

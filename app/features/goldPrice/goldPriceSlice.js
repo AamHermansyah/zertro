@@ -3,42 +3,48 @@ import { createSlice } from "@reduxjs/toolkit";
 const state = {
     loading: true,
     price_current: {},
-    oneWeek: { dates: [], 
+    oneWeek: { 
+        dates: [], 
         prices: [], 
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
         chp: 0
     },
-    twoWeek: { dates: [], 
+    twoWeek: { 
+        dates: [], 
         prices: [], 
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
         chp: 0
     },
-    oneMonth: { dates: [], 
+    oneMonth: { 
+        dates: [], 
         prices: [], 
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
         chp: 0
     },
-    threeMonth: { dates: [], 
+    threeMonth: { 
+        dates: [], 
         prices: [], 
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
         chp: 0
     },
-    sixMonth: { dates: [], 
+    sixMonth: { 
+        dates: [], 
         prices: [], 
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
         chp: 0
     },
-    oneYear: { dates: [], 
+    oneYear: { 
+        dates: [], 
         prices: [], 
         high_price: 0, 
         low_price: 0, 

@@ -27,11 +27,13 @@ export default function SixMonthChart({loading}){
                         loading={loading}
                         title="Laba 6 Bulan (USD)"
                         data={`$${data.ch}`}
+                        indicator={data.ch >= 0 ? 1 : -1}
                         />
                         <MiniCard 
                         loading={loading}
                         title="Laba 6 Bulan (%)"
                         data={`${data.chp}%`}
+                        indicator={data.ch >= 0 ? 1 : -1}
                         />
                     </div>
                     <ChartGold

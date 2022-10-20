@@ -48,7 +48,7 @@ export default function ProviderWraper({children}){
                 dispatch(setLoadingFetchDataGoldPrice());
             })
         }
-    }, []);
+    }, [router.pathname, isLoading]);
 
     return children
 }
