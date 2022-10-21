@@ -6,6 +6,8 @@ import {
   LinearScale,
   PointElement,
   LineElement,
+  BarController,
+  BarElement,
   Title,
   Tooltip,
   Legend,
@@ -24,7 +26,9 @@ ChartJS.register(
   Title,
   Tooltip,
   Legend,
-  LineController
+  LineController,
+  BarController,
+  BarElement
 )
 
 function MyApp({ Component, pageProps }) {

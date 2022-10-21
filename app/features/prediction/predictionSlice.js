@@ -46,7 +46,13 @@ export const predictionSlice = createSlice({
     initialState: state,
     reducers: {
         addCAGRPrediction: (state, action) => {
-            return {...state, ...action.payload}
+            return {
+                ...state,
+                CAGR: {
+                    ...state.CAGR,
+                    ...action.payload
+                }
+            }
         },
         setLoadingFetchDataPrediction: (state, action) => {
             return {...state, loading: false}
