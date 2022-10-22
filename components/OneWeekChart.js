@@ -37,7 +37,7 @@ export default function OneWeekChart({loading}){
                         />
                     </div>
                     <ChartGold
-                    title="Harga 7 Hari Terakhir"
+                    title="Harga 7 Hari Terakhir (Kg)"
                     data={data}
                     />
                 </div>

@@ -37,7 +37,7 @@ export default function OneMonthChart({loading}){
                         />
                     </div>
                     <ChartGold
-                    title="Harga 30 Hari Terakhir"
+                    title="Harga 30 Hari Terakhir (Kg)"
                     data={data}
                     />
                 </div>

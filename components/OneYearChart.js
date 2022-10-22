@@ -37,7 +37,7 @@ export default function OneYearChart({loading}){
                         />
                     </div>
                     <ChartGold
-                    title="Harga 1 Tahun Terakhir"
+                    title="Harga 1 Tahun Terakhir (Kg)"
                     data={data}
                     />
                 </div>

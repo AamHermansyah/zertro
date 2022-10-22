@@ -6,37 +6,44 @@ const state = {
         oneWeek: {
             ch: 0,
             chp: 0,
-            data: []
+            data: [],
+            buy_recommendation: -1
         },
         twoWeek: {
             ch: 0,
             chp: 0,
-            data: []
+            data: [],
+            buy_recommendation: -1
         },
         oneMonth: {
             ch: 0,
             chp: 0,
-            data: []
+            data: [],
+            buy_recommendation: -1
         },
         threeMonth: {
             ch: 0,
             chp: 0,
-            data: []
+            data: [],
+            buy_recommendation: -1
         },
         sixMonth: {
             ch: 0,
             chp: 0,
-            data: []
+            data: [],
+            buy_recommendation: -1
         },
         oneYear: {
             ch: 0,
             chp: 0,
-            data: []
+            data: [],
+            buy_recommendation: -1
         },
         sixYear: {
             ch: 0,
             chp: 0,
-            data: []
+            data: [],
+            buy_recommendation: -1
         },
     }
 }

@@ -37,7 +37,7 @@ export default function TwoWeekChart({loading}){
                         />
                     </div>
                     <ChartGold
-                    title="Harga 14 Hari Terakhir"
+                    title="Harga 14 Hari Terakhir (Kg)"
                     data={data}
                     />
                 </div>

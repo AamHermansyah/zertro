@@ -37,7 +37,7 @@ export default function ThreeMonthChart({loading}){
                         />
                     </div>
                     <ChartGold
-                    title="Harga 3 Bulan Terakhir"
+                    title="Harga 3 Bulan Terakhir (Kg)"
                     data={data}
                     />
                 </div>

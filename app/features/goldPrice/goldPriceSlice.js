@@ -2,7 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const state = {
     loading: true,
-    price_current: {},
+    today: {
+        current: {
+            price: 0,
+            ch: 0,
+            chp: 0,
+            indicator: 1
+        },
+        yesterday: {
+            ch: 0,
+            chp: 0,
+            indicator: 1
+        }
+    },
     oneWeek: { 
         dates: [], 
         prices: [], 
@@ -58,7 +70,7 @@ export const goldPriceSlice = createSlice({
     initialState: state,
     reducers: {
         addGoldPriceCurrent: (state, action) => {
-            return {...state, price_current: action.payload}
+            return {...state, today: action.payload}
         },
         addGoldDataPrice: (state, action) => {
             return {...state, ...action.payload};
@@ -69,6 +81,6 @@ export const goldPriceSlice = createSlice({
     }
 });
 
-export const { addPriceCurrent, addGoldDataPrice, setLoadingFetchDataGoldPrice } = goldPriceSlice.actions;
+export const { addGoldPriceCurrent, addGoldDataPrice, setLoadingFetchDataGoldPrice } = goldPriceSlice.actions;
 
 export default goldPriceSlice.reducer;

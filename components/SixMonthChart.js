@@ -37,7 +37,7 @@ export default function SixMonthChart({loading}){
                         />
                     </div>
                     <ChartGold
-                    title="Harga 6 Bulan Terakhir"
+                    title="Harga 6 Bulan Terakhir (Kg)"
                     data={data}
                     />
                 </div>

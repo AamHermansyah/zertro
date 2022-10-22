@@ -7,6 +7,9 @@ import { CHP_IDEAL_FOR_BUY, CONFIG_DATE } from "../../../../utils/config";
 import { useEffect, useState } from "react";
 import handleCAGRPrediction from "../../../../promises/handleCAGRPrediction";
 import { addCAGRPrediction, setLoadingFetchDataPrediction } from "../../../../app/features/prediction/predictionSlice";
+import getDataHistory from "../../../../promises/getDataHistory";
+import gold_price_annual from "../../../../constants/json/gold_price_annual.json";
+import formatDate from '../../../../utils/formatDate';
 
 const buttons = [
     {title: '7 Hari', value: CONFIG_DATE.ONE_WEEK},
@@ -19,14 +22,14 @@ const buttons = [
 ]
 
 export default function OneWeekChart(){
-    const [typeTimeData, setTypeTimeData] = useState('oneWeek')
-    const loading = useSelector(state => state.prediction_data.loading)
+    const [typeTimeData, setTypeTimeData] = useState('oneWeek');
+    const loading = useSelector(state => state.prediction_data.loading);
     const dataGoldPrice = useSelector(state => state.gold_price);
-    const prediction_data = useSelector(state => state.prediction_data.CAGR)
+    const prediction_data = useSelector(state => state.prediction_data.CAGR);
     const dispatch = useDispatch();
 
     const chpGoldPrice = dataGoldPrice[typeTimeData].chp;
-    const labelPredictionDisplay = prediction_data[typeTimeData].ch > 0 ? 1 : -1;
+    const labelPredictionDisplay = prediction_data[typeTimeData].buy_recommendation;
     const labelCHGoldPriceDisplay = chpGoldPrice <= CHP_IDEAL_FOR_BUY || chpGoldPrice > 0 ? 1 : -1;
 
     useEffect(() => {
@@ -66,6 +69,23 @@ export default function OneWeekChart(){
                 break;
             default:
                 setTypeTimeData('oneWeek');
+                const LONG_RANGE_YEAR_INDEX = 4;
+                const lastYear = +dataGoldPrice.oneYear.dates[0].split('-')[0] - 1;
+                const startYear = lastYear - LONG_RANGE_YEAR_INDEX;
+                getDataHistory(gold_price_annual, {
+                    from: startYear + '-12',
+                    to: lastYear + '-12',
+                    type: 'slice'
+                })
+                .then(res => {
+                    const today = formatDate(new Date());
+                    const price_today = dataGoldPrice.today.current.price;
+                    
+                    console.log(dataGoldPrice.today);
+                })
+                .catch(err => {
+                    alert(err);
+                })
                 break;
         }
     }
@@ -86,7 +106,7 @@ export default function OneWeekChart(){
                 <div className="flex flex-wrap gap-6 mt-2 mb-6 px-4">
                     <div className="flex flex-col gap-2 mt-4">
                        <h1 className="text-md sm:text-xl">7 Hari Kedepan</h1>
-                       <div className="flex gap-4">
+                       <div className="flex flex-wrap gap-4">
                             <MiniCard 
                             loading={loading}
                             title="Prediksi (USD)"
@@ -132,7 +152,7 @@ export default function OneWeekChart(){
                     <ChartSkeleton /> :
                     <ChartGold
                     type="bar"
-                    title="Grafik 7 Hari Terakhir"
+                    title="Grafik 7 Hari Terakhir (Kg)"
                     backgroundColor={['transparent', prediction_data[typeTimeData].ch >= 0 ? '#38E54D' : '#F96666']}
                     data={{
                         ...dataGoldPrice[typeTimeData],

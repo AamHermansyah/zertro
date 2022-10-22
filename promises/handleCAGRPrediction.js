@@ -6,6 +6,7 @@ export default function handleCAGRPrediction(data){
         const open_price = +data[0];
         const close_price = +data[periode - 1];
         const chp_growth = countCAGR(open_price, close_price, periode);
+        const buy_recommendation = chp_growth >= 0 ? 1 : -1;
         let change;
 
         const result = [open_price];
@@ -15,6 +16,6 @@ export default function handleCAGRPrediction(data){
             result.push(result_growth);
         }
 
-        resolve({ ch: +Number(change).toFixed(2), chp: chp_growth, data: result });
+        resolve({ ch: +Number(change).toFixed(2), chp: chp_growth, data: result, buy_recommendation });
     })
 }
