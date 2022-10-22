@@ -62,6 +62,14 @@ const state = {
         low_price: 0, 
         ch: 0, 
         chp: 0
+    },
+    sixYear: {
+        dates: [], 
+        prices: [], 
+        high_price: 0, 
+        low_price: 0, 
+        ch: 0, 
+        chp: 0
     }
 }
 

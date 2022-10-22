@@ -1,7 +1,7 @@
 export default function MiniCard({loading, title, data, indicator, label}){
     return (
         <div className="flex justify-center items-center gap-y-2 flex-col shadow-sm rounded-xl h-28 sm:h-32 w-32 xs:w-36 sm:w-48 p-2 sm:p-4 bg-white relative">
-            <span className={`${!loading && label ===  1 ? 'bg-green-500' : 'hidden'} absolute top-0 left-0 text-[.6rem] py-0.5 px-1 rounded-sm text-white`}>{label ===  1 && 'Beli'}</span>
+            <span className={`${!label ? 'hidden' : ''} ${!loading && label ===  1 ? 'bg-green-500' : 'bg-red-500'} absolute top-0 left-0 text-[.6rem] py-0.5 px-1 rounded-sm text-white`}>{label ===  1 ? 'Beli/Jual' : 'Tahan'}</span>
             {loading ?
             <div className="h-full w-full rounded-md bg-gray-300 animate-pulse"></div> :
             <>

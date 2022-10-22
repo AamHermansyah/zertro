@@ -7,9 +7,8 @@ import { CHP_IDEAL_FOR_BUY, CONFIG_DATE } from "../../../../utils/config";
 import { useEffect, useState } from "react";
 import handleCAGRPrediction from "../../../../promises/handleCAGRPrediction";
 import { addCAGRPrediction, setLoadingFetchDataPrediction } from "../../../../app/features/prediction/predictionSlice";
-import getDataHistory from "../../../../promises/getDataHistory";
-import gold_price_annual from "../../../../constants/json/gold_price_annual.json";
-import formatDate from '../../../../utils/formatDate';
+import NotePrediction from "../../../../components/NotePrediction";
+import formatDate from "../../../../utils/formatDate";
 
 const buttons = [
     {title: '7 Hari', value: CONFIG_DATE.ONE_WEEK},
@@ -23,6 +22,10 @@ const buttons = [
 
 export default function OneWeekChart(){
     const [typeTimeData, setTypeTimeData] = useState('oneWeek');
+    const [timeTitle, setTimeTitle] = useState({
+        title: '7 Hari',
+        endDatePrediction: null
+    });
     const loading = useSelector(state => state.prediction_data.loading);
     const dataGoldPrice = useSelector(state => state.gold_price);
     const prediction_data = useSelector(state => state.prediction_data.CAGR);
@@ -46,46 +49,46 @@ export default function OneWeekChart(){
         }
     }, [loading, dataGoldPrice[typeTimeData].prices, typeTimeData]);
 
+    useEffect(() => {
+        const today = new Date();
+        let endDatePredictionOneWeek = new Date(today);
+        endDatePredictionOneWeek.setDate(today.getDate() - CONFIG_DATE.ONE_WEEK);
+        setTimeTitle(prev => ({
+            ...prev,
+            endDatePrediction: formatDate(endDatePredictionOneWeek)
+        }))
+    }, []);
+
     const handleButtonFilter = (event) => {
         event.preventDefault();
         switch(+event.target.value){
             case CONFIG_DATE.ONE_WEEK:
                 setTypeTimeData('oneWeek');
+                setTimeTitle({ title: '7 Hari' })
                 break;
             case CONFIG_DATE.TWO_WEEK:
                 setTypeTimeData('twoWeek');
+                setTimeTitle({ title: '14 Hari' })
                 break;
             case CONFIG_DATE.ONE_MONTH:
                 setTypeTimeData('oneMonth');
+                setTimeTitle({ title: '30 Hari' })
                 break;
             case CONFIG_DATE.THREE_MONTH:
-                setTypeTimeData('threeMonth')
+                setTypeTimeData('threeMonth');
+                setTimeTitle({ title: '3 Bulan' })
                 break;
             case CONFIG_DATE.SIX_MONTH:
                 setTypeTimeData('sixMonth');
+                setTimeTitle({ title: '6 Bulan' })
                 break;
             case CONFIG_DATE.ONE_YEAR:
                 setTypeTimeData('oneYear');
+                setTimeTitle({ title: '1 Tahun' })
                 break;
             default:
-                setTypeTimeData('oneWeek');
-                const LONG_RANGE_YEAR_INDEX = 4;
-                const lastYear = +dataGoldPrice.oneYear.dates[0].split('-')[0] - 1;
-                const startYear = lastYear - LONG_RANGE_YEAR_INDEX;
-                getDataHistory(gold_price_annual, {
-                    from: startYear + '-12',
-                    to: lastYear + '-12',
-                    type: 'slice'
-                })
-                .then(res => {
-                    const today = formatDate(new Date());
-                    const price_today = dataGoldPrice.today.current.price;
-                    
-                    console.log(dataGoldPrice.today);
-                })
-                .catch(err => {
-                    alert(err);
-                })
+                setTypeTimeData('sixYear');
+                setTimeTitle({ title: '6 Tahun' })
                 break;
         }
     }
@@ -93,19 +96,13 @@ export default function OneWeekChart(){
     return (
         <Navigation active="/dashboard/prediction">
             <section id="prediction_CAGR">
-                <h1 className="text-2xl sm:text-3xl font-bold mt-8 mx-4 mb-4 text-gray-800">Prediksi Compound Average Growth Rate</h1>
-                <div className="flex flex-col gap-2 bg-white text-white rounded-lg p-4 shadow text-sm mx-4">
-                    <span className="flex items-center justify-center w-max bg-gray-700 rounded-full h-6 px-3 uppercase">
-                    Note
-                    </span>
-                    <span className="inline-flex px-2 text-gray-700">
+                <NotePrediction title="Prediksi Compound Average Growth Rate">
                     Compounded annual growth rate (CAGR) adalah tingkat pertumbuhan per tahun selama rentang periode waktu tertentu. Prediksi CAGR bagus digunakan jika harga pertumbuhan emas memiliki tingkat grafik naik yang stabil atau konsisten. Prediksi CAGR ini juga bisa digunakan untuk melihat tren grafik yang sedang terjadi.
-                    </span>
-                </div>
+                </NotePrediction>
                 <h1 className="text-xl sm:text-2xl font-semibold mt-8 mx-4 text-gray-800">Prediksi laba</h1>
-                <div className="flex flex-wrap gap-6 mt-2 mb-6 px-4">
+                <div className="flex flex-wrap justify-between mt-2 mb-6 px-4">
                     <div className="flex flex-col gap-2 mt-4">
-                       <h1 className="text-md sm:text-xl">7 Hari Kedepan</h1>
+                       <h1 className="text-md sm:text-xl">{timeTitle.title} Kedepan (Sampai {timeTitle.endDatePrediction})</h1>
                        <div className="flex flex-wrap gap-4">
                             <MiniCard 
                             loading={loading}
@@ -121,6 +118,11 @@ export default function OneWeekChart(){
                             indicator={prediction_data[typeTimeData].ch >= 0 ? 1 : -1}
                             label={labelPredictionDisplay}
                             />
+                       </div>
+                    </div>
+                    <div className="flex flex-col gap-2 mt-4">
+                       <h1 className="text-md sm:text-xl">{timeTitle.title} Terakhir</h1>
+                       <div className="flex flex-wrap gap-4">
                             <MiniCard 
                             loading={loading}
                             title="Laba (USD)"
@@ -152,7 +154,7 @@ export default function OneWeekChart(){
                     <ChartSkeleton /> :
                     <ChartGold
                     type="bar"
-                    title="Grafik 7 Hari Terakhir (Kg)"
+                    title={`Grafik ${timeTitle.title} Terakhir (Kg)`}
                     backgroundColor={['transparent', prediction_data[typeTimeData].ch >= 0 ? '#38E54D' : '#F96666']}
                     data={{
                         ...dataGoldPrice[typeTimeData],

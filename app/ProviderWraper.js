@@ -7,7 +7,9 @@ import { SECRET_KEY, URL } from "../utils/config";
 import convertGoldDataToArray from "../promises/convertGoldDataToArray";
 import gold_price_one_year from "../constants/json/gold_price_one_year.json";
 import { useEffect } from "react";
-import { countLossAndProfit } from "../utils/utilsForNumber";
+import { countLossAndProfit, getMaxLowNumber } from "../utils/utilsForNumber";
+import gold_price_annual from "../constants/json/gold_price_annual.json";
+import getDataHistory from "../promises/getDataHistory";
 
 export default function ProviderWraper({children}){
     const router = useRouter();
@@ -49,6 +51,7 @@ export default function ProviderWraper({children}){
         const data = {...gold_price_one_year.rates, [today]: { XAU: res.rates.XAU }};
 
         if(router.pathname !== '/' && isLoading){
+            // handle current price
             convertGoldDataToArray(data)
             .then(res => {
                 const oneWeek = res.oneWeek;
@@ -72,6 +75,59 @@ export default function ProviderWraper({children}){
                         indicator: ch_chp_yesterday.ch >= 0 ? 1 : -1
                     }
                 }));
+
+                // handle data sixYear from json and API
+                let oneYear = res.oneYear;
+                const LONG_RANGE_YEAR_INDEX = 3;
+                const lastYear = +oneYear.dates[0].split('-')[0];
+                const toYear = lastYear - 1;
+                const fromYear = toYear - LONG_RANGE_YEAR_INDEX;
+                getDataHistory(gold_price_annual, {
+                    from: fromYear + '-12',
+                    to: toYear + '-12',
+                    type: 'slice'
+                })
+                .then(({data}) => {
+                    const today = 'sekarang';
+                    let last_year_index = 0;
+                    // filter last year from one year API
+                    let last_year_date = [...oneYear.dates]
+                        .reverse().find((date, index) => {
+                            if(date.includes(lastYear)){
+                                last_year_index = index;
+                            }
+                            return date.includes(lastYear);
+                        })
+                        .split('-');
+                    last_year_date = last_year_date[0] + '-' + last_year_date[1];
+                    let last_year_price = [...oneYear.prices[0]].reverse().find((prices, index) => index === last_year_index);
+                    // end filter
+
+                    data.dates = [...data.dates, last_year_date, today];
+                    data.prices = [...data.prices[0], last_year_price, price_today];
+                    // get high and low price
+                    const {min, max} = getMaxLowNumber(data.prices);
+                    // get ch and chp
+                    const periode = data.prices.length;
+                    const open_price = +data.prices[0];
+                    const close_price = +data.prices[periode - 1];
+                    const {ch, chp} = countLossAndProfit([open_price, close_price]);
+                    dispatch(addGoldDataPrice({
+                        sixYear: {
+                            dates: data.dates,
+                            prices: [data.prices],
+                            high_price: max,
+                            low_price: min,
+                            ch,
+                            chp
+                        }
+                    }))
+                })
+                .catch(err => {
+                    alert(err);
+                })
+
+                // handle goldPrice
                 dispatch(addGoldDataPrice(res));
             })
             .catch(err => {
