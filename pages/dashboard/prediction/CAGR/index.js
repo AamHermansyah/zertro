@@ -23,9 +23,9 @@ export default function OneWeekChart(){
     const loading = prediction_data.loading;
     const dispatch = useDispatch();
 
-    const chpGoldPrice = dataGoldPrice[typeTimeData].chp;
+    const isSameLabel = prediction_data[typeTimeData].buy_recommendation === dataGoldPrice[typeTimeData].buy_recommendation;
     const labelPredictionDisplay = prediction_data[typeTimeData].buy_recommendation;
-    const labelCHGoldPriceDisplay = chpGoldPrice <= CHP_IDEAL_FOR_BUY || chpGoldPrice > 0 ? 1 : -1;
+    const labelChpGoldPriceDisplay = dataGoldPrice[typeTimeData].buy_recommendation;
 
     const today = new Date();
 
@@ -127,7 +127,9 @@ export default function OneWeekChart(){
                 <h1 className="text-xl sm:text-2xl font-semibold mt-8 mx-4 text-gray-800">Prediksi laba</h1>
                 <div className="flex flex-wrap justify-between mt-2 mb-6 px-4">
                     <div className="flex flex-col gap-2 mt-4">
-                       <h3 className="text-md sm:text-xl">{timeTitle.title} Kedepan (Sampai {timeTitle.endDatePrediction})</h3>
+                        <h3 className="text-md sm:text-xl">
+                            {timeTitle.title} Kedepan (Sampai <span className="font-bold">{timeTitle.endDatePrediction})</span>
+                        </h3>
                        <div className="flex flex-wrap gap-4">
                             <MiniCard 
                             loading={loading}
@@ -135,6 +137,7 @@ export default function OneWeekChart(){
                             data={`$${prediction_data[typeTimeData].ch}`}
                             indicator={prediction_data[typeTimeData].ch >= 0 ? 1 : -1}
                             label={labelPredictionDisplay}
+                            isSameLabel={isSameLabel}
                             />
                             <MiniCard 
                             loading={loading}
@@ -142,6 +145,7 @@ export default function OneWeekChart(){
                             data={`${prediction_data[typeTimeData].chp}%`}
                             indicator={prediction_data[typeTimeData].ch >= 0 ? 1 : -1}
                             label={labelPredictionDisplay}
+                            isSameLabel={isSameLabel}
                             />
                        </div>
                     </div>
@@ -153,14 +157,16 @@ export default function OneWeekChart(){
                             title="Laba (USD)"
                             data={`$${dataGoldPrice[typeTimeData].ch}`}
                             indicator={dataGoldPrice[typeTimeData].ch > 0 ? 1 : -1}
-                            label={labelCHGoldPriceDisplay}
+                            label={labelChpGoldPriceDisplay}
+                            isSameLabel={isSameLabel}
                             />
                             <MiniCard 
                             loading={loading}
                             title="Laba (%)"
                             data={`${dataGoldPrice[typeTimeData].chp}%`}
                             indicator={dataGoldPrice[typeTimeData].ch > 0 ? 1 : -1}
-                            label={labelCHGoldPriceDisplay}
+                            label={labelChpGoldPriceDisplay}
+                            isSameLabel={isSameLabel}
                             />
                        </div>
                     </div>
@@ -180,10 +186,10 @@ export default function OneWeekChart(){
                     <ChartGold
                     type="bar"
                     title={`Grafik ${timeTitle.title} Terakhir (Kg)`}
-                    backgroundColor={['transparent', prediction_data[typeTimeData].ch >= 0 ? '#38E54D' : '#F96666']}
+                    backgroundColor={['transparent', 'transparent', prediction_data[typeTimeData].ch >= 0 ? '#38E54D' : '#F96666']}
                     data={{
                         ...dataGoldPrice[typeTimeData],
-                        prices: [dataGoldPrice[typeTimeData].prices[0], prediction_data[typeTimeData].data]
+                        prices: [dataGoldPrice[typeTimeData].prices[0], prediction_data[typeTimeData].data, prediction_data[typeTimeData].data]
                     }}
                     />
                 }

@@ -21,7 +21,8 @@ const state = {
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
-        chp: 0
+        chp: 0,
+        buy_recommendation: 0
     },
     twoWeek: { 
         dates: [], 
@@ -29,7 +30,8 @@ const state = {
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
-        chp: 0
+        chp: 0,
+        buy_recommendation: 0
     },
     oneMonth: { 
         dates: [], 
@@ -37,7 +39,8 @@ const state = {
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
-        chp: 0
+        chp: 0,
+        buy_recommendation: 0
     },
     threeMonth: { 
         dates: [], 
@@ -45,7 +48,8 @@ const state = {
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
-        chp: 0
+        chp: 0,
+        buy_recommendation: 0
     },
     sixMonth: { 
         dates: [], 
@@ -53,7 +57,8 @@ const state = {
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
-        chp: 0
+        chp: 0,
+        buy_recommendation: 0
     },
     oneYear: { 
         dates: [], 
@@ -61,7 +66,8 @@ const state = {
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
-        chp: 0
+        chp: 0,
+        buy_recommendation: 0
     },
     sixYear: {
         dates: [], 
@@ -69,7 +75,8 @@ const state = {
         high_price: 0, 
         low_price: 0, 
         ch: 0, 
-        chp: 0
+        chp: 0,
+        buy_recommendation: 0
     }
 }
 

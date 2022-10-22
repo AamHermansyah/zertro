@@ -8,7 +8,7 @@ import handleMovAvrgPrediction from "../../../../promises/handleMovAvrgPredictio
 import { buttons_prediction as buttons } from "../../../../constants";
 import ChartSkeleton from "../../../../layouts/ChartSKeleton";
 import ChartGold from "../../../../components/ChartGold";
-import { CONFIG_DATE } from "../../../../utils/config";
+import { CHP_IDEAL_FOR_BUY, CONFIG_DATE } from "../../../../utils/config";
 import formatDate from "../../../../utils/formatDate";
 
 export default function MovingAverage(){
@@ -23,6 +23,10 @@ export default function MovingAverage(){
     const dispatch = useDispatch();
 
     const today = new Date();
+
+    const isSameLabel = prediction_data[typeTimeData].buy_recommendation === dataGoldPrice[typeTimeData].buy_recommendation;
+    const labelPredictionDisplay = prediction_data[typeTimeData].buy_recommendation;
+    const labelChpGoldPriceDisplay = dataGoldPrice[typeTimeData].buy_recommendation;
     
     useEffect(() => {
         if(dataGoldPrice[typeTimeData].prices.length > 0){
@@ -117,39 +121,53 @@ export default function MovingAverage(){
         <Navigation active="/dashboard/prediction">
             <section id="prediction_moving_average">
                 <NotePrediction title="Prediksi Moving Average">
-                    Compounded annual growth rate (CAGR) adalah tingkat pertumbuhan per tahun selama rentang periode waktu tertentu. Prediksi CAGR bagus digunakan jika harga pertumbuhan emas memiliki tingkat grafik naik yang stabil atau konsisten. Prediksi CAGR ini juga bisa digunakan untuk melihat tren grafik yang sedang terjadi.
+                    Moving Average adalah indikator yang banyak digunakan untuk memperhalus pergerakan harga dengan menghilangkan beberapa fluktuasi harga yang kurang relevan berdasarkan perhitungan harga lampau, sehingga terbentuk garis rata-rata pergerakan harga dalam periode waktu tertentu. Indikator ini memiliki fungsi utama yaitu untuk mengetahui tren yang sedang berlaku.
                 </NotePrediction>
                 <h1 className="text-xl sm:text-2xl font-semibold mt-8 mx-4 text-gray-800">Prediksi laba</h1>
                 <div className="flex flex-wrap justify-between mt-2 mb-6 px-4">
                     <div className="flex flex-col gap-2 mt-4">
-                        <h3 className="text-md sm:text-xl">{timeTitle.title} Kedepan (Sampai {timeTitle.endDatePrediction})</h3>
+                        <h3 className="text-md sm:text-xl">
+                            {timeTitle.title} Kedepan (Sampai <span className="font-bold">{timeTitle.endDatePrediction})</span>
+                        </h3>
                         <div className="flex flex-wrap gap-4">
                             <MiniCard 
                             loading={loading}
                             title="Prediksi (USD)"
-                            data={`$123`}
+                            data={`$${prediction_data[typeTimeData].ch}`}
+                            indicator={prediction_data[typeTimeData].ch >= 0 ? 1 : -1}
+                            label={labelPredictionDisplay}
+                            isSameLabel={isSameLabel}
                             />
                             <MiniCard 
                             loading={loading}
                             title="Prediksi (%)"
-                            data={`123%`}
+                            data={`${prediction_data[typeTimeData].chp}%`}
+                            indicator={prediction_data[typeTimeData].ch >= 0 ? 1 : -1}
+                            label={labelPredictionDisplay}
+                            isSameLabel={isSameLabel}
                             />
                         </div>
                     </div>
                     <div className="flex flex-col gap-2 mt-4">
-                        <h1 className="text-md sm:text-xl">{timeTitle.title} Terakhir</h1>
-                        <div className="flex flex-wrap gap-4">
+                       <h1 className="text-md sm:text-xl">{timeTitle.title} Terakhir</h1>
+                       <div className="flex flex-wrap gap-4">
                             <MiniCard 
                             loading={loading}
-                            title="Prediksi (USD)"
-                            data={`$123`}
+                            title="Laba (USD)"
+                            data={`$${dataGoldPrice[typeTimeData].ch}`}
+                            indicator={dataGoldPrice[typeTimeData].ch > 0 ? 1 : -1}
+                            label={labelChpGoldPriceDisplay}
+                            isSameLabel={isSameLabel}
                             />
                             <MiniCard 
                             loading={loading}
-                            title="Prediksi (%)"
-                            data={`123%`}
+                            title="Laba (%)"
+                            data={`${dataGoldPrice[typeTimeData].chp}%`}
+                            indicator={dataGoldPrice[typeTimeData].ch > 0 ? 1 : -1}
+                            label={labelChpGoldPriceDisplay}
+                            isSameLabel={isSameLabel}
                             />
-                        </div>
+                       </div>
                     </div>
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4 sm:mb-2">
@@ -165,12 +183,11 @@ export default function MovingAverage(){
                 {loading ?
                     <ChartSkeleton /> :
                     <ChartGold
-                    type="bar"
                     title={`Grafik ${timeTitle.title} Terakhir (Kg)`}
-                    backgroundColor={['transparent', prediction_data[typeTimeData].ch >= 0 ? '#38E54D' : '#F96666']}
+                    backgroundColor={['transparent', 'transparent', prediction_data[typeTimeData].ch >= 0 ? '#38E54D' : '#F96666']}
                     data={{
                         ...dataGoldPrice[typeTimeData],
-                        prices: [dataGoldPrice[typeTimeData].prices[0], prediction_data[typeTimeData].data]
+                        prices: [dataGoldPrice[typeTimeData].prices[0], prediction_data[typeTimeData].data, prediction_data[typeTimeData].data]
                     }}
                     />
                 }

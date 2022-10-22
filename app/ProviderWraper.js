@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { addGoldDataPrice, addGoldPriceCurrent, setLoadingFetchDataGoldPrice } from "./features/goldPrice/goldPriceSlice";
 import formatDate from "../utils/formatDate";
-import { SECRET_KEY, URL } from "../utils/config";
+import { CHP_IDEAL_FOR_BUY, SECRET_KEY, URL } from "../utils/config";
 import convertGoldDataToArray from "../promises/convertGoldDataToArray";
 import gold_price_one_year from "../constants/json/gold_price_one_year.json";
 import { useEffect } from "react";
@@ -119,7 +119,8 @@ export default function ProviderWraper({children}){
                             high_price: max,
                             low_price: min,
                             ch,
-                            chp
+                            chp,
+                            buy_recommendation: chp <= CHP_IDEAL_FOR_BUY || chp > 0 ? 1 : -1
                         }
                     }))
                 })

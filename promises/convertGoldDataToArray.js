@@ -1,4 +1,4 @@
-import { CONFIG_DATE } from "../utils/config";
+import { CHP_IDEAL_FOR_BUY, CONFIG_DATE } from "../utils/config";
 import { countLossAndProfit, getMaxLowNumber } from "../utils/utilsForNumber";
 
 const handleGetGoldDataDetail = res => {
@@ -12,7 +12,8 @@ const handleGetGoldDataDetail = res => {
         high_price: max,
         low_price: min,
         ch,
-        chp
+        chp,
+        buy_recommendation: chp <= CHP_IDEAL_FOR_BUY || chp > 0 ? 1 : -1
     }
 }
 

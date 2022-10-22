@@ -12,6 +12,10 @@ export default function NotePrediction({title, children}){
                     <span className="ml-2 text-sm sm:text-md">Waktu yang pas untuk membeli atau menjual.</span>
                 </div>
                 <div className="flex items-center">
+                    <div className="h-3 w-6 bg-amber-500 rounded-sm" />
+                    <span className="ml-2 text-sm sm:text-md">Keputusan ada ditangan anda.</span>
+                </div>
+                <div className="flex items-center">
                     <div className="h-3 w-6 bg-red-500 rounded-sm" />
                     <span className="ml-2 text-sm sm:text-md">Dianjurkan untuk menahan terlebih dahulu.</span>
                 </div>

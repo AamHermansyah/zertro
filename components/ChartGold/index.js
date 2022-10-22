@@ -1,8 +1,8 @@
 import { Chart } from "react-chartjs-2";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 
-const COLORS = ['rgb(55, 48, 163)', '#EB1D36', '#EAE509'];
-const LABELS = ['XAU', 'Growth', 'growth'];
+const COLORS = ['rgb(55, 48, 163)', '#EB1D36' ,'#EAE509'];
+const LABELS = ['XAU', 'Growth (line)', 'Growth (bar)'];
 
 export default function ChartGold({data, label, title, color, type, backgroundColor}){
     const { width } = useWindowDimensions();
@@ -49,7 +49,7 @@ export default function ChartGold({data, label, title, color, type, backgroundCo
                         borderColor: color ? color : COLORS[index],
                         backgroundColor: backgroundColor ? backgroundColor[index] : 'transparent',
                         tension: 0.5,
-                        type: index === 0 ? 'line' : 'bar'
+                        type: index === 2 ? 'bar' : 'line'
                     }))
                 }}
                 options={config}
