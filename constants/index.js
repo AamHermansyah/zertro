@@ -1,4 +1,5 @@
 import { Github, Whatsapp, Instagram, aam, delvan, yuldan, DropdownArrow } from '../public';
+import { CONFIG_DATE } from '../utils/config';
 
 export const footer = {
     navigation: {
@@ -168,4 +169,14 @@ export const features = [
         title: "Tabel Laba Pertahun",
         description: "Menampilkan informasi mengenai laba persentase harga emas pertahun."
     },
+]
+
+export const buttons_prediction = [
+    {title: '7 Hari', value: CONFIG_DATE.ONE_WEEK},
+    {title: '14 Hari', value: CONFIG_DATE.TWO_WEEK},
+    {title: '30 Hari', value: CONFIG_DATE.ONE_MONTH},
+    {title: '3 Bulan', value: CONFIG_DATE.THREE_MONTH},
+    {title: '6 Bulan', value: CONFIG_DATE.SIX_MONTH},
+    {title: '1 Tahun', value: CONFIG_DATE.ONE_YEAR},
+    {title: '6 Tahun', value: CONFIG_DATE.ONE_YEAR * 6},
 ]

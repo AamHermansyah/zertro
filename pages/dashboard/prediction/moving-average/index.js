@@ -1,39 +1,34 @@
-import { useDispatch, useSelector } from "react-redux";
-import ChartGold from "../../../../components/ChartGold";
-import MiniCard from "../../../../components/MiniCard";
-import Navigation from "../../../../layouts/Navigation";
-import ChartSkeleton from "../../../../layouts/ChartSKeleton";
-import { CHP_IDEAL_FOR_BUY, CONFIG_DATE } from "../../../../utils/config";
 import { useEffect, useState } from "react";
-import handleCAGRPrediction from "../../../../promises/handleCAGRPrediction";
-import { addCAGRPrediction, setLoadingCAGRDataPrediction } from "../../../../app/features/prediction/predictionSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { addMovingAverageDataPrediction, setLoadingMovingAverageDataPrediction } from "../../../../app/features/prediction/predictionSlice";
+import MiniCard from "../../../../components/MiniCard";
 import NotePrediction from "../../../../components/NotePrediction";
-import formatDate from "../../../../utils/formatDate";
+import Navigation from "../../../../layouts/Navigation";
+import handleMovAvrgPrediction from "../../../../promises/handleMovAvrgPrediction";
 import { buttons_prediction as buttons } from "../../../../constants";
+import ChartSkeleton from "../../../../layouts/ChartSKeleton";
+import ChartGold from "../../../../components/ChartGold";
+import { CONFIG_DATE } from "../../../../utils/config";
+import formatDate from "../../../../utils/formatDate";
 
-export default function OneWeekChart(){
+export default function MovingAverage(){
     const [typeTimeData, setTypeTimeData] = useState('oneWeek');
     const [timeTitle, setTimeTitle] = useState({
         title: '7 Hari',
         endDatePrediction: null
     });
-
     const dataGoldPrice = useSelector(state => state.gold_price);
-    const prediction_data = useSelector(state => state.prediction_data.CAGR);
+    const prediction_data = useSelector(state => state.prediction_data.moving_average);
     const loading = prediction_data.loading;
     const dispatch = useDispatch();
 
-    const chpGoldPrice = dataGoldPrice[typeTimeData].chp;
-    const labelPredictionDisplay = prediction_data[typeTimeData].buy_recommendation;
-    const labelCHGoldPriceDisplay = chpGoldPrice <= CHP_IDEAL_FOR_BUY || chpGoldPrice > 0 ? 1 : -1;
-
     const today = new Date();
-
+    
     useEffect(() => {
         if(dataGoldPrice[typeTimeData].prices.length > 0){
-            handleCAGRPrediction(dataGoldPrice[typeTimeData].prices[0])
+            handleMovAvrgPrediction(dataGoldPrice[typeTimeData].prices[0])
             .then(res => {
-                dispatch(addCAGRPrediction({
+                dispatch(addMovingAverageDataPrediction({
                     [typeTimeData]: res
                 }));
             })
@@ -41,7 +36,7 @@ export default function OneWeekChart(){
                 alert(err);
             })
             .finally(() => {
-                dispatch(setLoadingCAGRDataPrediction());
+                dispatch(setLoadingMovingAverageDataPrediction());
             })
         }
     }, [loading, dataGoldPrice[typeTimeData].prices, typeTimeData]);
@@ -117,52 +112,44 @@ export default function OneWeekChart(){
                 break;
         }
     }
-    
+
     return (
         <Navigation active="/dashboard/prediction">
-            <section id="prediction_CAGR">
-                <NotePrediction title="Prediksi Compound Average Growth Rate">
+            <section id="prediction_moving_average">
+                <NotePrediction title="Prediksi Moving Average">
                     Compounded annual growth rate (CAGR) adalah tingkat pertumbuhan per tahun selama rentang periode waktu tertentu. Prediksi CAGR bagus digunakan jika harga pertumbuhan emas memiliki tingkat grafik naik yang stabil atau konsisten. Prediksi CAGR ini juga bisa digunakan untuk melihat tren grafik yang sedang terjadi.
                 </NotePrediction>
                 <h1 className="text-xl sm:text-2xl font-semibold mt-8 mx-4 text-gray-800">Prediksi laba</h1>
                 <div className="flex flex-wrap justify-between mt-2 mb-6 px-4">
                     <div className="flex flex-col gap-2 mt-4">
-                       <h3 className="text-md sm:text-xl">{timeTitle.title} Kedepan (Sampai {timeTitle.endDatePrediction})</h3>
-                       <div className="flex flex-wrap gap-4">
+                        <h3 className="text-md sm:text-xl">{timeTitle.title} Kedepan (Sampai {timeTitle.endDatePrediction})</h3>
+                        <div className="flex flex-wrap gap-4">
                             <MiniCard 
                             loading={loading}
                             title="Prediksi (USD)"
-                            data={`$${prediction_data[typeTimeData].ch}`}
-                            indicator={prediction_data[typeTimeData].ch >= 0 ? 1 : -1}
-                            label={labelPredictionDisplay}
+                            data={`$123`}
                             />
                             <MiniCard 
                             loading={loading}
                             title="Prediksi (%)"
-                            data={`${prediction_data[typeTimeData].chp}%`}
-                            indicator={prediction_data[typeTimeData].ch >= 0 ? 1 : -1}
-                            label={labelPredictionDisplay}
+                            data={`123%`}
                             />
-                       </div>
+                        </div>
                     </div>
                     <div className="flex flex-col gap-2 mt-4">
-                       <h1 className="text-md sm:text-xl">{timeTitle.title} Terakhir</h1>
-                       <div className="flex flex-wrap gap-4">
+                        <h1 className="text-md sm:text-xl">{timeTitle.title} Terakhir</h1>
+                        <div className="flex flex-wrap gap-4">
                             <MiniCard 
                             loading={loading}
-                            title="Laba (USD)"
-                            data={`$${dataGoldPrice[typeTimeData].ch}`}
-                            indicator={dataGoldPrice[typeTimeData].ch > 0 ? 1 : -1}
-                            label={labelCHGoldPriceDisplay}
+                            title="Prediksi (USD)"
+                            data={`$123`}
                             />
                             <MiniCard 
                             loading={loading}
-                            title="Laba (%)"
-                            data={`${dataGoldPrice[typeTimeData].chp}%`}
-                            indicator={dataGoldPrice[typeTimeData].ch > 0 ? 1 : -1}
-                            label={labelCHGoldPriceDisplay}
+                            title="Prediksi (%)"
+                            data={`123%`}
                             />
-                       </div>
+                        </div>
                     </div>
                 </div>
                 <div className="flex flex-wrap gap-2 mb-4 sm:mb-2">
