@@ -1,7 +1,7 @@
 export default function TablePercentagePerYears(){
     
     return (
-        <div className="flex flex-col items-center" id="tabel-laba">
+        <div className="flex flex-col items-center bg-white p-2 sm:p-4 rounded-sm sm:rounded-md" id="tabel-laba">
             <h2 className="text-lg ss:text-2xl font-semibold">Tabel laba</h2>
             <table className="table w-full max-w-4xl shadow rounded-lg">
                 <thead>
