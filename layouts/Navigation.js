@@ -79,7 +79,7 @@ export default function Navigation({children, active}){
                                     return (
                                         <div className="text-base font-medium text-gray-800" key={list.id}>
                                             <div onClick={() => handleNavChildDisplay(list.id)}
-                                            className={`${list.href === active ? 'bg-primary text-white' : ''} flex items-center justify-between pr-4 rounded-l-full`}>
+                                            className={`${list.href === active ? 'bg-primary text-white' : ''} flex items-center justify-between pr-4 rounded-l-full cursor-pointer`}>
                                                 <Link href={list.href}>
                                                     <a id={list.id}
                                                     onClick={e => e.preventDefault()}

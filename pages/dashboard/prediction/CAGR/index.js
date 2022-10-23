@@ -186,7 +186,7 @@ export default function OneWeekChart(){
                     <ChartGold
                     type="bar"
                     title={`Grafik ${timeTitle.title} Terakhir (Kg)`}
-                    backgroundColor={['transparent', 'transparent', prediction_data[typeTimeData].ch >= 0 ? '#38E54D' : '#F96666']}
+                    backgroundColor={['transparent', 'transparent', prediction_data[typeTimeData].ch >= 0 ? '#00BF63' : '#F96666']}
                     data={{
                         ...dataGoldPrice[typeTimeData],
                         prices: [dataGoldPrice[typeTimeData].prices[0], prediction_data[typeTimeData].data, prediction_data[typeTimeData].data]

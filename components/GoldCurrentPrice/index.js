@@ -2,11 +2,40 @@ import Image from "next/image";
 import CardSkeleton from "../../layouts/CardSkeleton";
 import MiniCard from "../MiniCard";
 import { gold as goldIcon } from '../../public';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addCAGRPrediction, addMovingAverageDataPrediction, setLoadingCAGRDataPrediction } from "../../app/features/prediction/predictionSlice";
+import handleCAGRPrediction from "../../promises/handleCAGRPrediction";
+import handleMovAvrgPrediction from "../../promises/handleMovAvrgPrediction";
+import { useEffect } from "react";
 
 export default function GoldCurrentPrice(){
     const loading = useSelector(state => state.gold_price.loading);
     const {current, yesterday} = useSelector(state => state.gold_price.today);
+    const oneYearDataPrice = useSelector(state => state.gold_price.oneYear.prices);
+    const cagr_one_year = useSelector(state => state.prediction_data.CAGR.oneYear);
+    const mov_avrg_one_year = useSelector(state => state.prediction_data.moving_average.oneYear);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+      if(oneYearDataPrice.length > 0){
+        const data = oneYearDataPrice[0];
+        Promise.all([handleCAGRPrediction(data), handleMovAvrgPrediction(data)])
+          .then(([cagr, ma]) => {
+            dispatch(addCAGRPrediction({
+              oneYear: cagr
+            }));
+            dispatch(addMovingAverageDataPrediction({
+              oneYear: ma
+            }));
+          })
+          .catch(err => {
+            alert(err);
+          })
+          .finally(() => {
+            dispatch(setLoadingCAGRDataPrediction());
+        })
+      }
+    }, [loading, oneYearDataPrice,]);
     
     return (
         <section id="harga-emas" className="sm:p-4 mb-4">
@@ -59,18 +88,27 @@ export default function GoldCurrentPrice(){
             <div className="flex flex-wrap gap-4 md:gap-6">
               <MiniCard 
                 loading={loading}
-                title="CAGR"
-                data="12.4%"
+                title="CAGR (USD)"
+                data={`$${cagr_one_year.ch}`}
+                indicator={cagr_one_year.chp >= 0 ? 1 : -1}
                 />
-                <MiniCard 
+              <MiniCard 
                 loading={loading}
-                title="Moving Average"
-                data="1.3%"
+                title="CAGR (%)"
+                data={`${cagr_one_year.chp}%`}
+                indicator={cagr_one_year.chp >= 0 ? 1 : -1}
                 />
-                <MiniCard 
+              <MiniCard 
                 loading={loading}
-                title="Linear Regression"
-                data="6.5%"
+                title="Moving Average (USD)"
+                data={`$${mov_avrg_one_year.ch}`}
+                indicator={mov_avrg_one_year.chp >= 0 ? 1 : -1}
+                />
+              <MiniCard 
+                loading={loading}
+                title="Moving Average (%)"
+                data={`${mov_avrg_one_year.chp}%`}
+                indicator={mov_avrg_one_year.chp >= 0 ? 1 : -1}
                 />
             </div>
           </div>

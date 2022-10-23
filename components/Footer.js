@@ -19,11 +19,9 @@ export default function Footer(){
                 </ul>
                 <div className="pt-8 flex max-w-xs mx-auto items-center justify-evenly">
                     {footer.socialMedia.listItem.map(social => (
-                        <Link href={social.href} key={social.id}>
-                            <a className="text-gray-600 hover:text-primary dark:hover:text-white transition-colors duration-200">
-                                {social.icon}
-                            </a>
-                        </Link>
+                        <a href={`https://${social.href}`} key={social.id} target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-primary dark:hover:text-white transition-colors duration-200">
+                            {social.icon}
+                        </a>
                     ))}
                 </div>
                 <div className="text-center text-gray-500 dark:text-gray-200 pt-8 font-light flex items-center justify-center">

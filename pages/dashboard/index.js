@@ -9,7 +9,7 @@ import TwoWeekChart from "../../components/TwoWeekChart";
 import { useSelector } from "react-redux";
 
 export default function Home(){
-  const isLoading = useSelector(state => state.gold_price.loading)
+  const isLoading = useSelector(state => state.gold_price.loading);
 
   return (
     <Navigation active="/dashboard">

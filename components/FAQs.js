@@ -21,28 +21,30 @@ const data = [
     },
     {
         question: 'Apakah zetro gratis?',
-        description: 'Zetro melayani anda 100% gratis dengan kemudahan yang telah kami sediakan semoga dapat membantu anda dalam berinvestasi emas.'
+        description: 'Zetro melayani anda 100% gratis dengan kemudahan yang telah kami sediakan semoga dapat membantu anda dalam berinvestasi emas. Kami akan terus mengembangkan sistem ini untuk kenyamanan kita bersama sebagai investor yang bijak.'
     },
 ]
 
 export default function FAQs(){
     return (
-        <div className="max-w-screen-xl p-8 ss:p-0 mx-auto mt-12">
-            <h2 className="text-3xl p-8 pb-2 font-extrabold leading-9 border-b-2 border-gray-300 text-gray-900 mb-12">
-            FAQs
-            </h2>
-            <ul className="flex items-start justify-center gap-8 flex-wrap text-justify">
-                {data.map((faq, index) => (
-                    <li className="ss:w-2/5" key={index}>
-                        <p className="text-lg font-medium leading-6 text-gray-900">
-                            {faq.question}
-                        </p>
-                        <p className="mt-2 text-base leading-6 text-gray-500">
-                            {faq.description}
-                        </p>
-                    </li>
-                ))}
-            </ul>
-        </div>
+        <section id="faq">
+            <div className="max-w-screen-xl p-8 ss:p-0 mx-auto mt-12">
+                <h2 className="text-3xl p-8 pb-2 font-extrabold leading-9 border-b-2 border-gray-300 text-gray-900 mb-12">
+                FAQs
+                </h2>
+                <ul className="flex items-start justify-center gap-8 flex-wrap text-justify">
+                    {data.map((faq, index) => (
+                        <li className="ss:w-2/5" key={index}>
+                            <p className="text-lg font-medium leading-6 text-gray-900">
+                                {faq.question}
+                            </p>
+                            <p className="mt-2 text-base leading-6 text-gray-500">
+                                {faq.description}
+                            </p>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </section>
     )
 }

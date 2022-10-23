@@ -12,16 +12,11 @@ export const footer = {
             },
             {
                 id: 'nav-2',
-                content: 'Donasi',
-                href: '#Donasi'
+                content: 'Contact',
+                href: '#team'
             },
             {
                 id: 'nav-3',
-                content: 'Contact',
-                href: '#contact'
-            },
-            {
-                id: 'nav-4',
                 content: 'FAQ',
                 href: '#faq'
             }
@@ -32,17 +27,17 @@ export const footer = {
         listItem: [
             {
                 id: 'social-1',
-                href: '/',
+                href: 'wa.me/6282316126449?text=Hii...',
                 icon: <Whatsapp />
             },
             {
                 id: 'social-2',
-                href: '/',
+                href: 'instagram.com/aamhrmnsyah',
                 icon: <Instagram />
             },
             {
                 id: 'social-3',
-                href: '/',
+                href: 'github.com/AamHermansyah',
                 icon: <Github />
             }
         ]
@@ -57,6 +52,16 @@ export const navbar = [
     },
     {
         id: 'navbar-2',
+        title: 'Prediksi',
+        href: '/dashboard/prediction',
+        icon: <DropdownArrow />,
+        child: [
+            {link: '/dashboard/prediction/CAGR', title: 'CAGR'},
+            {link: '/dashboard/prediction/moving-average', title: 'Moving Average'}
+        ]
+    },
+    {
+        id: 'navbar-3',
         title: 'Histori Harga',
         href: '/dashboard/history',
         icon: <DropdownArrow />,
@@ -66,38 +71,14 @@ export const navbar = [
         ]
     },
     {
-        id: 'navbar-3',
-        title: 'Histori Tabel Laba',
-        href: '/dashboard/tabel-laba',
-        icon: <DropdownArrow />,
-        child: [
-            {link: '/dashboard/tabel-laba/', title: '1 Minggu Terakhir'},
-            {link: '/dashboard/tabel-laba/', title: '1 Bulan Terakhir'},
-            {link: '/dashboard/tabel-laba/6month', title: '6 Bulan Terakhir'},
-            {link: '/dashboard/tabel-laba/annual', title: 'Pertahun'},
-            {link: '/dashboard/tabel-laba/monthly', title: 'Perbulan'},
-        ]
-    },
-    {
         id: 'navbar-4',
-        title: 'Prediksi',
-        href: '/dashboard/prediction',
-        icon: <DropdownArrow />,
-        child: [
-            {link: '/dashboard/prediction/CAGR', title: 'CAGR'},
-            {link: '/dashboard/prediction/moving-average', title: 'Moving Average'},
-            {link: '/dashboard/prediction/linear-regression', title: 'Linear Regression'},
-        ]
+        title: 'Histori Tabel Laba',
+        href: '/dashboard/tabel-laba'
     },
     {
         id: 'navbar-5',
-        title: 'Donasi',
-        href: '/donasi',
-    },
-    {
-        id: 'navbar-6',
         title: 'Contact',
-        href: '/contact',
+        href: '/#team',
     },
 ]
 
