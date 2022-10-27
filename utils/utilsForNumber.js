@@ -9,7 +9,7 @@ export function countLossAndProfit(arr){
     const open_price = arr[0];
     const close_price = arr[arr.length - 1]
     const ch = +Number(close_price - open_price).toFixed(2);
-    let chp = +Number(ch / open_price * 100).toFixed(2);
+    const chp = +Number(ch / open_price * 100).toFixed(2);
     
     return {
       ch, chp

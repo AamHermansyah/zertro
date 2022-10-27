@@ -5,11 +5,11 @@ import { addGoldDataPrice, addGoldPriceCurrent, setLoadingFetchDataGoldPrice } f
 import formatDate from "../utils/formatDate";
 import { CHP_IDEAL_FOR_BUY, CONFIG_DATE, SECRET_KEY, URL } from "../utils/config";
 import convertGoldDataToArray from "../promises/convertGoldDataToArray";
-// import gold_price_one_year from "../constants/json/gold_price_one_year.json";
 import { useEffect } from "react";
 import { countLossAndProfit, getMaxLowNumber } from "../utils/utilsForNumber";
 import gold_price_annual from "../constants/json/gold_price_annual.json";
 import getDataHistory from "../promises/getDataHistory";
+import gold_price_one_year from "../constants/json/gold_price_one_year.json";
 
 export default function ProviderWraper({children}){
     const router = useRouter();

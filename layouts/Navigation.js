@@ -89,7 +89,7 @@ export default function Navigation({children, active}){
                                                 </Link>
                                                 {list.icon}
                                             </div>
-                                            <div className={`${navChild.id === list.id && navChild.display ? 'flex' : 'hidden'} flex-col gap-y-2 pl-12 mt-2`}>
+                                            <div className={`${navChild.id === list.id && navChild.display ? 'flex' : 'hidden'} text-sm flex-col gap-y-2 pl-12 my-2`}>
                                                 {list.child.map((child, index) => (
                                                     <Link href={child.link} key={index}>
                                                         <a onClick={handleNavbar}>{child.title}</a>

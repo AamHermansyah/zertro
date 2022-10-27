@@ -1,4 +1,4 @@
-import { DAYS } from "./config";
+import { DAYS, MONTHS } from "./config";
 
 export default function formatDate(date, config){
     let dd = date.getDate();
@@ -19,3 +19,22 @@ export default function formatDate(date, config){
     
     return date
  }
+
+ export function convertAndFilterToMonthString(dates){
+    dates = dates.map(date => date.replace(/(\-[0-9]+)$/g, ''));
+    return Array
+        .from(new Set(dates))
+        .map((date, index) => {
+            const [year, month] = date.split('-');
+            return {
+                id: index,
+                value: `${MONTHS[Number(month) - 1]} ${year}`
+            }
+        });
+}
+
+export function convertMonthStringToNumber(date){
+    let month = date.split(' ').map(d => MONTHS.indexOf(d))[0] + 1;
+    if(month < 10) month = `0${month}`;
+    return date.replace(/^([a-z]+)/gi, month).split(' ').reverse().join('-')
+}
