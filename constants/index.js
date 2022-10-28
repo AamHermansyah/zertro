@@ -73,7 +73,12 @@ export const navbar = [
     {
         id: 'navbar-4',
         title: 'Histori Tabel Laba',
-        href: '/dashboard/tabel-laba'
+        href: '/dashboard/tabel-laba',
+        icon: <DropdownArrow />,
+        child: [
+            {link: '/dashboard/tabel-laba/one-last-year', title: '1 Tahun Terakhir'},
+            {link: '/dashboard/tabel-laba/annual', title: 'Semua (per tahun)'},
+        ]
     },
     {
         id: 'navbar-5',

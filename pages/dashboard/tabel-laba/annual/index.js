@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
-import { convertAndFilterToMonthString, convertMonthStringToNumber } from "../../../utils/formatDate";
-import Navigation from "../../../layouts/Navigation";
-import TableCHAndCHP from "../../../components/TableCHAndCHP";
-import handleCHTableHistory from "../../../promises/handleCHTableHistory";
+import Navigation from "../../../../layouts/Navigation";
+import TableCHAndCHP from "../../../../components/TableCHAndCHP";
+import handleCHTableHistory from "../../../../promises/handleCHTableHistory";
+import gold_price_annual from "../../../../constants/json/gold_price_annual.json";
 
-export default function TablePercentagePerYears(){
+export default function PriceChangeTablePerYear(){
     const [data, setData] = useState([]);
     const [months, setMonths] = useState([]);
     const [currentIndexFilter, setCurrentIndexFilter] = useState(0);
     const [fetchStatusFilter, setFetchStatusFilter] = useState(true);
-    const {dates: oneYearDates, prices: oneYearPrice} = useSelector(state => state.gold_price.oneYear);
+    const allYearDates = gold_price_annual.map((res, index) => ({id: index, value: res.Date}));
+    const allYearPrices = gold_price_annual.map(res => res.Price);
 
     const selectFromInputRef = useRef();
 
@@ -24,60 +25,36 @@ export default function TablePercentagePerYears(){
     }
 
     useEffect(() => {
-        setMonths(convertAndFilterToMonthString(oneYearDates));
-    }, [oneYearDates]);
+        setMonths(allYearDates);
+    }, []);
 
     useEffect(() => {
-        if(months.length > 0 && fetchStatusFilter){
-            // get start date and end date
-            let startDate = currentIndexFilter || months[0].id;
-            let endDate = data.length > 0 ? +selectFromInputRef.current.value : months[months.length - 1].id;
-            let startDateIndex;
-            let endDateIndex;
+        let startDateIndex = currentIndexFilter || months[0].id;
+        let endDateIndex = data.length > 0 ? +selectFromInputRef.current.value : months[months.length - 1].id;
 
-            // map data gold price one year
-            let goldPriceOneYear = oneYearDates
-                .map((date, index) => ({date, price: oneYearPrice[0][index]}));
+        let goldPriceAllYear = allYearDates.map((date, index) => ({date: date.value, price: allYearPrices[index]}));
 
-            months
-                .filter(month => month.id === startDate || month.id === endDate)
-                .map(month => month.value)
-                .forEach((month, index) => index === 0 ? startDate = month : endDate = month );
+        if(startDateIndex === endDateIndex){
+            goldPriceAllYear = goldPriceAllYear.filter((data, index) => index === startDateIndex);
+        } else goldPriceAllYear = goldPriceAllYear.slice(startDateIndex, endDateIndex);
 
-            startDate = convertMonthStringToNumber(startDate)
-            endDate = currentIndexFilter === endDate ? startDate : convertMonthStringToNumber(endDate);
-
-            // if start date and end date is same
-            if(startDate !== endDate){
-                 // get date index
-                goldPriceOneYear.forEach((dataGoldPrice, index) => {
-                    const date = dataGoldPrice.date.split('-').slice(0,2).join('-');
-                    if(date === startDate && startDateIndex === undefined) startDateIndex = index;
-                    if(date === endDate) endDateIndex = index;
-                });
-
-                // filter data gold price one year
-                goldPriceOneYear = goldPriceOneYear.slice(startDateIndex, endDateIndex + 1);
-            } else goldPriceOneYear = goldPriceOneYear.filter(({date}) => date.split('-').slice(0,2).join('-') === endDate);
-
-            handleCHTableHistory(goldPriceOneYear)
-                .then(res => {
-                    setData(res);
-                })
+        handleCHTableHistory(goldPriceAllYear)
+            .then(res => {
+                setData(res);
+            })
 
             setFetchStatusFilter(false);
-        }
-    }, [months, fetchStatusFilter]);
+    }, [fetchStatusFilter]);
     
     return (
         <Navigation active="/dashboard/tabel-laba">
             <div className="bg-white max-w-4xl p-4 sm:p-8 shadow-md rounded-md mx-auto" id="tabel-laba">
-                <h2 className="text-lg ss:text-2xl font-semibold mb-4 text-center">Tabel laba perhari (1 Tahun)</h2>
+                <h2 className="text-lg ss:text-2xl font-semibold mb-4 text-center">Tabel laba pertahun</h2>
                 <form className="flex flex-wrap gap-2 mb-2">
                     <label className="text-gray-700" htmlFor="animals">
                         Dari
                         <select onChange={handleFilterSelect}
-                        id="animals" 
+                        id="animals"
                         className="block w-52 py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500" name="animals">
                             {months.length > 0 ? months.map((month) => (
                                 <option key={month.id} value={month.id}>
@@ -116,9 +93,9 @@ export default function TablePercentagePerYears(){
                 <TableCHAndCHP 
                 loading={fetchStatusFilter}
                 data={data}
-                headLabel={['Tanggal', 'Laba', 'Harga Buka', 'Harga Tutup']}
+                headLabel={['Tahun', 'Laba', 'Harga Buka', 'Harga Tutup']}
                 />
-            </div>    
+            </div>
         </Navigation>
     )
 }
