@@ -6,7 +6,8 @@ export default function getDataHistory(json, config) {
             if(config?.from && config?.to){
                 if(config?.type === 'slice'){
                     const startIndex = json.findIndex(data => data.Date === config.from);
-                    const endIndex = json.findIndex(data => data.Date === config.to)
+                    let endIndex = json.findIndex(data => data.Date === config.to);
+                    endIndex = endIndex === -1 ? json.length - 1 : endIndex;
                     json = json.slice(startIndex, endIndex + 1);
                 } else {
                     json = json.filter((res, index) => {

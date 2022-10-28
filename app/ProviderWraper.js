@@ -9,7 +9,7 @@ import { useEffect } from "react";
 import { countLossAndProfit, getMaxLowNumber } from "../utils/utilsForNumber";
 import gold_price_annual from "../constants/json/gold_price_annual.json";
 import getDataHistory from "../promises/getDataHistory";
-import gold_price_one_year from "../constants/json/gold_price_one_year.json";
+// import gold_price_one_year from "../constants/json/gold_price_one_year.json";
 
 export default function ProviderWraper({children}){
     const router = useRouter();

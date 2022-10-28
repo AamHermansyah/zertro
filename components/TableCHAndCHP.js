@@ -24,7 +24,7 @@ export default function TablePercentagePerYears({data, loading, headLabel}){
             <div className="w-full overflow-x-scroll scrollbar-hide">
                 <table className="table w-full max-w-4xl shadow rounded-lg mx-auto">
                     <thead>
-                        <tr className="text-[.7rem] ss:text-base ss:font-semibold">
+                        <tr className="text-sm ss:text-base ss:font-semibold">
                             {headLabel.map((label, index) => {
                                 return label === 'Tahun' || label === 'Tanggal' ?
                                 <th className="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap text-primary" key={index}>
@@ -40,7 +40,7 @@ export default function TablePercentagePerYears({data, loading, headLabel}){
                             })}
                         </tr>
                     </thead>
-                    <tbody className="text-center text-[.7rem] ss:text-base font-thin ss:font-normal">
+                    <tbody className="text-center text-sm ss:text-base font-thin ss:font-normal">
                         {data
                         .filter((res, index) => index <= limitPagination)
                         .map((res, index) => (

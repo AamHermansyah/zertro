@@ -40,6 +40,7 @@ export default function History(){
                     toMonth: prev.fromMonth
                 }))
             }
+
             return
         }
 
@@ -53,7 +54,6 @@ export default function History(){
         }
 
         const value = inputFromYearRef.current.value;
-        const isSameMonth = inputFromMonthRef.current.value === inputToMonthRef.current.value;
         
         setInputFilter(prev => ({
             ...prev,
@@ -94,13 +94,14 @@ export default function History(){
         getDataHistory(gold_price_monthly, config)
             .then(res => {
                 setTimeout(() => {
+                    const data = res.data;
                     setData(res.data);
                     setInputFilter(prev => ({
                         ...prev,
-                        fromYear: res.data.filterYears,
+                        fromYear: data.filterYears,
                         fromMonth: Array.from({length: 12}).map((arr, index) => index + 1),
-                        toYear: res.data.filterYears,
-                        toMonth: Array.from({length: 12}).map((arr, index) => index + 1),
+                        toYear: data.filterYears,
+                        toMonth: Array.from({length: 12}).map((arr, index) => index + 1)
                     }));
                     setIsLoading(false);
                 }, 3000);
