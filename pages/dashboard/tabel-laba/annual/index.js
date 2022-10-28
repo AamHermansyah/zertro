@@ -29,22 +29,24 @@ export default function PriceChangeTablePerYear(){
     }, []);
 
     useEffect(() => {
-        let startDateIndex = currentIndexFilter || months[0].id;
-        let endDateIndex = data.length > 0 ? +selectFromInputRef.current.value : months[months.length - 1].id;
+        if(months.length > 0 && fetchStatusFilter){
+            let startDateIndex = currentIndexFilter || months[0].id;
+            let endDateIndex = data.length > 0 ? +selectFromInputRef.current.value : months[months.length - 1].id;
 
-        let goldPriceAllYear = allYearDates.map((date, index) => ({date: date.value, price: allYearPrices[index]}));
+            let goldPriceAllYear = allYearDates.map((date, index) => ({date: date.value, price: allYearPrices[index]}));
 
-        if(startDateIndex === endDateIndex){
-            goldPriceAllYear = goldPriceAllYear.filter((data, index) => index === startDateIndex);
-        } else goldPriceAllYear = goldPriceAllYear.slice(startDateIndex, endDateIndex);
+            if(startDateIndex === endDateIndex){
+                goldPriceAllYear = goldPriceAllYear.filter((data, index) => index === startDateIndex);
+            } else goldPriceAllYear = goldPriceAllYear.slice(startDateIndex, endDateIndex);
 
-        handleCHTableHistory(goldPriceAllYear)
-            .then(res => {
-                setData(res);
-            })
+            handleCHTableHistory(goldPriceAllYear)
+                .then(res => {
+                    setData(res);
+                })
 
             setFetchStatusFilter(false);
-    }, [fetchStatusFilter]);
+        }
+    }, [fetchStatusFilter, months]);
     
     return (
         <Navigation active="/dashboard/tabel-laba">

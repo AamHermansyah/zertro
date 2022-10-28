@@ -50,7 +50,7 @@ export default function TablePercentagePerYears({data, loading, headLabel}){
                     <tbody className="text-center text-sm ss:text-base">
                         {data
                         .filter((res, index) => index <= limitPagination)
-                        .map((res, index, arr) => (
+                        .map((res, index) => (
                             <tr className="text-gray-900 odd:bg-gray-200" key={index}>
                                 <td className="border-b-2 p-4 dark:border-dark-5">{res.date}</td>
                                 <td className="border-b-2 p-4 dark:border-dark-5">
@@ -63,7 +63,7 @@ export default function TablePercentagePerYears({data, loading, headLabel}){
                                     </div>
                                 </td>
                                 <td className="border-b-2 p-4 dark:border-dark-5">
-                                    {index === 0 && isSortTypeIncrement ? '-' : index === arr.length - 1 && !isSortTypeIncrement ? '-' : `$${res.open_price}`}
+                                    {index === 0 && isSortTypeIncrement ? '-' : res.date === data[data.length - 1].date && !isSortTypeIncrement ? '-' : `$${res.open_price}`}
                                 </td>
                                 <td className="border-b-2 p-4 dark:border-dark-5">${res.close_price}</td>
                             </tr>
