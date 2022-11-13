@@ -40,7 +40,7 @@ export default function MovingAverage(){
                 alert(err);
             })
             .finally(() => {
-                dispatch(setLoadingMovingAverageDataPrediction());
+                dispatch(setLoadingMovingAverageDataPrediction(false));
             })
         }
     }, [loading, dataGoldPrice[typeTimeData].prices, typeTimeData]);
@@ -184,11 +184,16 @@ export default function MovingAverage(){
                     <ChartSkeleton /> :
                     <ChartGold
                     title={`Grafik ${timeTitle.title} Terakhir (Kg)`}
-                    backgroundColor={['transparent', 'transparent', prediction_data[typeTimeData].ch >= 0 ? '#00BF63' : '#F96666']}
+                    backgroundColor={['transparent', 'transparent', prediction_data[typeTimeData].ch >= 0 ? '#00BF63' : '#EB1D36']}
+                    label={['XAU', 'Moving Average', 'Growth']}
                     data={{
                         ...dataGoldPrice[typeTimeData],
-                        prices: [dataGoldPrice[typeTimeData].prices[0], prediction_data[typeTimeData].data, prediction_data[typeTimeData].data]
-                    }}
+                        prices: [
+                                dataGoldPrice[typeTimeData].prices[0], 
+                                prediction_data[typeTimeData].data[1],
+                                prediction_data[typeTimeData].data[0]
+                            ]
+                        }}
                     />
                 }
             </section>

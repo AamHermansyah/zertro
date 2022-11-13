@@ -187,10 +187,15 @@ export default function OneWeekChart(){
                     type="bar"
                     title={`Grafik ${timeTitle.title} Terakhir (Kg)`}
                     backgroundColor={['transparent', 'transparent', prediction_data[typeTimeData].ch >= 0 ? '#00BF63' : '#F96666']}
+                    label={['XAU', 'CAGR', 'Growth']}
                     data={{
-                        ...dataGoldPrice[typeTimeData],
-                        prices: [dataGoldPrice[typeTimeData].prices[0], prediction_data[typeTimeData].data, prediction_data[typeTimeData].data]
-                    }}
+                            ...dataGoldPrice[typeTimeData],
+                            prices: [
+                                dataGoldPrice[typeTimeData].prices[0], 
+                                prediction_data[typeTimeData].data[1], 
+                                prediction_data[typeTimeData].data[0]
+                            ]
+                         }}
                     />
                 }
             </section>

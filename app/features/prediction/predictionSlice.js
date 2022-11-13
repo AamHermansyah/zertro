@@ -107,7 +107,7 @@ export const predictionSlice = createSlice({
             }
         },
         setLoadingCAGRDataPrediction: (state, action) => {
-            return {...state, CAGR: {...state.CAGR, loading: false}}
+            return {...state, CAGR: {...state.CAGR, loading: action.payload}}
         },
         addMovingAverageDataPrediction: (state, action) => {
             return {
@@ -119,7 +119,7 @@ export const predictionSlice = createSlice({
             }
         },
         setLoadingMovingAverageDataPrediction: (state, action) => {
-            return {...state, moving_average: {...state.moving_average, loading: false}}
+            return {...state, moving_average: {...state.moving_average, loading: action.payload}}
         }
     }
 })

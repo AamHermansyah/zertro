@@ -9,15 +9,15 @@ export default function NotePrediction({title, children}){
                 <span className="text-justify font-bold">{children}</span>
                 <div className="flex items-center mt-4">
                     <div className="h-3 w-6 bg-green-500 rounded-sm" />
-                    <span className="ml-2 text-sm sm:text-md">Waktu yang pas untuk membeli atau menjual.</span>
+                    <span className="ml-2 text-sm sm:text-md">Trend sedang naik.</span>
                 </div>
                 <div className="flex items-center">
                     <div className="h-3 w-6 bg-amber-500 rounded-sm" />
-                    <span className="ml-2 text-sm sm:text-md">Keputusan ada ditangan anda.</span>
+                    <span className="ml-2 text-sm sm:text-md">Harga turun lebih dari 10%, waktu yang pas untuk mencicil investasi.</span>
                 </div>
                 <div className="flex items-center">
                     <div className="h-3 w-6 bg-red-500 rounded-sm" />
-                    <span className="ml-2 text-sm sm:text-md">Dianjurkan untuk menahan terlebih dahulu.</span>
+                    <span className="ml-2 text-sm sm:text-md">Trend sedang turun.</span>
                 </div>
             </div>
         </>

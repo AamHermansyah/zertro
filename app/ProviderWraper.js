@@ -23,7 +23,7 @@ export default function ProviderWraper({children}){
     //             "base": "USD",
     //             "timestamp": 1625609377,
     //             "rates": {
-    //                 "XAU": 0.00053853
+    //                 "XAU": 0.00060545
     //             }
     //         }
     //         const today = formatDate(new Date());

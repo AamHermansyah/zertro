@@ -2,7 +2,7 @@ import { DAYS, MONTHS } from "./config";
 
 export default function formatDate(date, config){
     let dd = date.getDate();
-    let mm = date.getMonth()+1;
+    let mm = date.getMonth() + 1;
     let yyyy = date.getFullYear();
     dd = dd < 10 ? '0' + dd : dd;
     mm = mm < 10 ? '0' + mm : mm;
