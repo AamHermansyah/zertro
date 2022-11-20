@@ -25,7 +25,7 @@ export default function Footer(){
                     ))}
                 </div>
                 <div className="text-center text-gray-500 dark:text-gray-200 pt-8 font-light flex items-center justify-center">
-                    <span className="font-semibold mr-2 text-primary">Zetro</span>2022 | All Reversed
+                    <span className="font-semibold mr-2 text-primary">LearnGold</span>2022 | All Reversed
                 </div>
             </div>
         </footer>

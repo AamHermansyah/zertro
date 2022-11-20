@@ -21,7 +21,7 @@ export default function Hero(){
                         </span>
                     </h2>
                     <p className="text-md sm:text-xl mt-4 max-w-lg text-white">
-                        <span className="bg-white px-1 text-xl sm:text-3xl text-primary font-semibold">Zetro</span> dapat membantu anda dalam melakukan investasi emas dan memprediksi waktu yang tepat ketika anda membeli dan menjualnya kembali.
+                        <span className="bg-white px-1 text-xl sm:text-3xl text-primary font-semibold">LearnGold</span> dapat membantu anda dalam melakukan investasi emas dan memprediksi waktu yang tepat ketika anda membeli dan menjualnya kembali.
                     </p>
                     <div className="mt-6 ms:mt-12 inline-flex rounded-md shadow">
                         <Link href="/dashboard">

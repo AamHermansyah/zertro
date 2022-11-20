@@ -52,7 +52,7 @@ export default function Navigation({children, active}){
                 <div className="md:hidden fixed top-0 left-0 bg-white w-full h-16 flex justify-between px-4 z-[999]">
                     <div className="p-4 text-center">
                         <Link href="/">
-                            <a className="flex-shrink-0 text-2xl text-primary font-semibold">Zetro</a>
+                            <a className="flex-shrink-0 text-2xl text-primary font-semibold">LearnGold</a>
                         </Link>
                     </div>
                     <div id="navHamb" className={`-mr-2 flex md:hidden`} onClick={handleNavbar}>
@@ -68,7 +68,7 @@ export default function Navigation({children, active}){
                 <nav id="sideNav" className={`${data.navigationDisplay ? 'flex' : style.navigation.display} ${style.navigation.shadow} flex-col bg-white fixed w-[250px] h-screen top-0 left-0 z-[999] dark:bg-gray-800 duration-200 transition-all`}>
                     <div className="p-4 text-center">
                         <Link href="/">
-                            <a className="flex-shrink-0 text-2xl text-primary font-semibold">Zetro</a>
+                            <a className="flex-shrink-0 text-2xl text-primary font-semibold">LearnGold</a>
                         </Link>
                     </div>
                     <div className="flex flex-col px-2">

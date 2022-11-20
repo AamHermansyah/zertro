@@ -37,10 +37,10 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <meta charSet="UTF-8"/>
         <meta name="description" content="Sistem AI berbasis website untuk prediksi harga emas"/>
-        <meta name="keywords" content="Emas, Harga, Zetro, Prediksi" />
-        <meta name="author" content="Zetro Development" />
+        <meta name="keywords" content="Emas, Harga, LearnGold, Prediksi" />
+        <meta name="author" content="LearnGold Development" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
-        <title>Zetro - AI Prediksi Harga Emas</title>
+        <title>LearnGold - Belajar Prediksi Harga Emas</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Provider store={store}>

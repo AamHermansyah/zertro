@@ -3,7 +3,7 @@ import Hero from "../components/Hero";
 import Footer from "../components/Footer";
 import Features from "../components/Features";
 import Teams from "../components/Teams";
-import AboutZetro from "../components/AboutZetro";
+import AboutLearnGold from "../components/AboutLearnGold";
 import FAQs from "../components/FAQs";
 import CTA from "../components/CTA";
 
@@ -14,7 +14,7 @@ export default function Home(){
           <div className="bg-white w-full h-16 flex justify-between items-center px-4 sm:px-12">
             <div className="p-4 text-center">
                 <Link href="/">
-                    <a className="flex-shrink-0 text-2xl text-primary font-semibold">Zetro</a>
+                    <a className="flex-shrink-0 text-2xl text-primary font-semibold">LearnGold</a>
                 </Link>
             </div>
             <nav>
@@ -42,7 +42,7 @@ export default function Home(){
               </h2>
             </div>
           </section>
-          <AboutZetro />
+          <AboutLearnGold />
           <Features />
           <Teams />
           <CTA />
